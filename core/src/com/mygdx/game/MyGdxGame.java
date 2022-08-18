@@ -24,7 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		ScreenUtils.clear(1, 1, 1, 1);
 		float dt = Gdx.graphics.getDeltaTime();
 		update(dt);
-		animation.setTime(Gdx.graphics.getDeltaTime());
+		animation.setTime(dt);
 
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
 		Gdx.graphics.setTitle("Было сделано "+ clickCounter +" левых кликов мышкой");
