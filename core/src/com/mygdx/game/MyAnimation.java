@@ -3,28 +3,26 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MyAnimation {
 
     private Texture img;
-
     private Animation<TextureRegion> anim;
 
     private float time;
-    private float speed = 2;
-    private float startPositionX = 0;
+    private float speed = 200F;
     private float currentPosition = 0;
 
 
-
-    public MyAnimation (String name, int col, int row, Animation.PlayMode playMode){
+    public MyAnimation(String name, int col, int row, Animation.PlayMode playMode) {
         img = new Texture(name);
         TextureRegion region0 = new TextureRegion(img);
         int xCnt = region0.getRegionWidth() / col;
         int yCnt = region0.getRegionHeight() / row;
         TextureRegion[][] regions0 = region0.split(xCnt, yCnt);
-        TextureRegion[] region1 = new TextureRegion[regions0.length*regions0[0].length];
+        TextureRegion[] region1 = new TextureRegion[regions0.length * regions0[0].length];
         int count = 0;
         for (int i = 0; i < regions0.length; i++) {
             for (int j = 0; j < regions0[0].length; j++) {
@@ -32,33 +30,60 @@ public class MyAnimation {
             }
         }
 
-        anim = new Animation<TextureRegion>(1/15f, region1);
+        anim = new Animation<TextureRegion>(1 / 60f, region1);
         anim.setPlayMode(playMode);
-
         time += Gdx.graphics.getDeltaTime();
 
     }
 
-    public void moveRight(){
-       currentPosition = startPositionX += speed;
-    }
-    public void moveLeft(){
-        currentPosition = startPositionX -= speed;
+    public void update(float dt) {
+        if (!getFrame().isFlipX()) {
+            currentPosition += speed*dt;
+            if (getCurrentPositionX() + getFrame().getRegionWidth() >= Gdx.graphics.getWidth()) {
+                getFrame().flip(true, false);
+            }
+        } else if (getFrame().isFlipX()){
+            currentPosition -= speed*dt;
+            if (getCurrentPositionX() <= 0.0F) {
+                getFrame().flip(true, false);
+            }
+        }
     }
 
-    public TextureRegion getFrame() {return anim.getKeyFrame(time);}
-    public void setTime(float time) {this.time += time;}
-    public void zeroTime(){this.time = 0;}
-    public boolean isAnimationOver() {return anim.isAnimationFinished(time);}
-    public void setPlayMode(Animation.PlayMode playMode) {anim.setPlayMode(playMode);}
-    public float getSpeed () {return this.speed;}
-    public float getStartPositionX() {return this.startPositionX;}
-    public float getCurrentPositionX() {return this.currentPosition;}
+    public void render(SpriteBatch batch) {
+        batch.draw(getFrame(), currentPosition, 0);
+    }
 
+    public TextureRegion getFrame() {
+        return anim.getKeyFrame(time);
+    }
+
+    public void setTime(float time) {
+        this.time += time;
+    }
+
+    public void zeroTime() {
+        this.time = 0;
+    }
+
+    public boolean isAnimationOver() {
+        return anim.isAnimationFinished(time);
+    }
+
+    public void setPlayMode(Animation.PlayMode playMode) {
+        anim.setPlayMode(playMode);
+    }
+
+    public float getSpeed() {
+        return this.speed;
+    }
+
+    public float getCurrentPositionX() {
+        return this.currentPosition;
+    }
 
     public void dispose() {
         img.dispose();
     }
-
 
 }
