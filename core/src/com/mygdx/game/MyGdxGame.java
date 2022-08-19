@@ -3,45 +3,39 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-
 public class MyGdxGame extends ApplicationAdapter {
-    SpriteBatch batch;
-    int clickCounter;
-    MyAnimation animation;
+	SpriteBatch batch;
+	Texture img;
+	int clickCounter;
+	
+	@Override
+	public void create () {
+		batch = new SpriteBatch();
+		img = new Texture("javacup.jpg");
+	}
 
-    @Override
-    public void create() {
-        batch = new SpriteBatch();
-        animation = new MyAnimation("boy.png", 6, 3, Animation.PlayMode.LOOP);
-    }
+	@Override
+	public void render () {
+		ScreenUtils.clear(0, 0, 0, 0);
 
-    @Override
-    public void render() {
-        ScreenUtils.clear(1, 1, 1, 1);
-        float dt = Gdx.graphics.getDeltaTime();
-        update(dt);
-        animation.setTime(dt);
+		float x = Gdx.input.getX() - img.getWidth()/2;
+		float y = Gdx.graphics.getHeight() - Gdx.input.getY() - img.getHeight()/2;
 
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
-        Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
+		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
 
-        batch.begin();
-        animation.render(batch);
-        batch.end();
-    }
-
-    @Override
-    public void dispose() {
-        batch.dispose();
-        animation.dispose();
-    }
-
-    public void update(float dt) {
-        animation.update(dt);
-    }
-
+		Gdx.graphics.setTitle("Было сделано "+ clickCounter +" левых кликов мышкой");
+		batch.begin();
+		batch.draw(img, x, y);
+		batch.end();
+	}
+	
+	@Override
+	public void dispose () {
+		batch.dispose();
+		img.dispose();
+	}
 }
