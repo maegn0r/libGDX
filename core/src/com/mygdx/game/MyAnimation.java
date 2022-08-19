@@ -33,7 +33,6 @@ public class MyAnimation {
         anim = new Animation<TextureRegion>(1 / 20f, region1);
         anim.setPlayMode(playMode);
         time += Gdx.graphics.getDeltaTime();
-
     }
 
     public void update(float dt) {
