@@ -30,7 +30,7 @@ public class MyAnimation {
             }
         }
 
-        anim = new Animation<TextureRegion>(1 / 60f, region1);
+        anim = new Animation<TextureRegion>(1 / 20f, region1);
         anim.setPlayMode(playMode);
         time += Gdx.graphics.getDeltaTime();
 
@@ -38,14 +38,18 @@ public class MyAnimation {
 
     public void update(float dt) {
         if (!getFrame().isFlipX()) {
-            currentPosition += speed*dt;
+            currentPosition += speed * dt;
             if (getCurrentPositionX() + getFrame().getRegionWidth() >= Gdx.graphics.getWidth()) {
-                getFrame().flip(true, false);
+                for (TextureRegion keyFrame : anim.getKeyFrames()) {
+                    keyFrame.flip(true, false);
+                }
             }
-        } else if (getFrame().isFlipX()){
-            currentPosition -= speed*dt;
+        } else if (getFrame().isFlipX()) {
+            currentPosition -= speed * dt;
             if (getCurrentPositionX() <= 0.0F) {
-                getFrame().flip(true, false);
+                for (TextureRegion keyFrame : anim.getKeyFrames()) {
+                    keyFrame.flip(true, false);
+                }
             }
         }
     }

@@ -9,39 +9,39 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 
 public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	int clickCounter;
-	MyAnimation animation;
+    SpriteBatch batch;
+    int clickCounter;
+    MyAnimation animation;
 
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		animation = new MyAnimation("boy.png",6,3, Animation.PlayMode.LOOP);
-	}
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
+        animation = new MyAnimation("boy.png", 6, 3, Animation.PlayMode.LOOP);
+    }
 
-	@Override
-	public void render () {
-		ScreenUtils.clear(1, 1, 1, 1);
-		float dt = Gdx.graphics.getDeltaTime();
-		update(dt);
-		animation.setTime(dt);
+    @Override
+    public void render() {
+        ScreenUtils.clear(1, 1, 1, 1);
+        float dt = Gdx.graphics.getDeltaTime();
+        update(dt);
+        animation.setTime(dt);
 
-		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
-		Gdx.graphics.setTitle("Было сделано "+ clickCounter +" левых кликов мышкой");
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
+        Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
 
-		batch.begin();
-		animation.render(batch);
-		batch.end();
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		animation.dispose();
-	}
+        batch.begin();
+        animation.render(batch);
+        batch.end();
+    }
 
-	public void update(float dt) {
-		animation.update(dt);
-	}
+    @Override
+    public void dispose() {
+        batch.dispose();
+        animation.dispose();
+    }
+
+    public void update(float dt) {
+        animation.update(dt);
+    }
 
 }
