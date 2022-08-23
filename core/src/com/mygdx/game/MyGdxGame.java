@@ -13,10 +13,11 @@ public class MyGdxGame extends ApplicationAdapter {
     int clickCounter;
     MyAnimation animation;
 
+
     @Override
     public void create() {
         batch = new SpriteBatch();
-        animation = new MyAnimation("boy.png", 6, 3, Animation.PlayMode.LOOP);
+        animation = new MyAnimation("atlas/ogrepack.atlas",Animation.PlayMode.LOOP);
     }
 
     @Override

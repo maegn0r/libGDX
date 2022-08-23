@@ -1,132 +1,57 @@
-
 ogrepack.png
-size: 1024, 256
-format: RGBA8888
-filter: Nearest, Nearest
-repeat: none
+size:1024,256
+repeat:none
 Attack
-  rotate: false
-  xy: 0, 101
-  size: 125, 139
-  orig: 125, 139
-  offset: 0, 0
-  index: 3
+index:3
+bounds:0,101,125,139
 Attack
-  rotate: false
-  xy: 0, 0
-  size: 107, 101
-  orig: 107, 101
-  offset: 0, 0
-  index: 4
+index:4
+bounds:0,0,107,101
 Attack
-  rotate: false
-  xy: 125, 120
-  size: 96, 120
-  orig: 96, 120
-  offset: 0, 0
-  index: 2
+index:2
+bounds:125,120,96,120
 Attack
-  rotate: false
-  xy: 483, 140
-  size: 84, 100
-  orig: 84, 100
-  offset: 0, 0
-  index: 5
+index:5
+bounds:221,140,84,100
 Attack
-  rotate: false
-  xy: 731, 134
-  size: 81, 106
-  orig: 81, 106
-  offset: 0, 0
-  index: 6
+index:6
+bounds:305,134,81,106
 Attack
-  rotate: false
-  xy: 382, 36
-  size: 65, 92
-  orig: 65, 92
-  offset: 0, 0
-  index: 1
+index:1
+bounds:658,148,65,92
 Attack
-  rotate: false
-  xy: 447, 39
-  size: 62, 101
-  orig: 62, 101
-  offset: 0, 0
-  index: 7
+index:7
+bounds:912,139,62,101
 Walk
-  rotate: false
-  xy: 221, 133
-  size: 90, 107
-  orig: 90, 107
-  offset: 0, 0
-  index: 7
+index:11
+bounds:386,150,70,90
 Walk
-  rotate: false
-  xy: 311, 128
-  size: 87, 112
-  orig: 87, 112
-  offset: 0, 0
-  index: 1
+index:8
+bounds:456,155,68,85
 Walk
-  rotate: false
-  xy: 398, 145
-  size: 85, 95
-  orig: 85, 95
-  offset: 0, 0
-  index: 3
+index:4
+bounds:524,152,67,88
 Walk
-  rotate: false
-  xy: 567, 141
-  size: 82, 99
-  orig: 82, 99
-  offset: 0, 0
-  index: 5
+index:3
+bounds:591,152,67,88
 Walk
-  rotate: false
-  xy: 649, 128
-  size: 82, 112
-  orig: 82, 112
-  offset: 0, 0
-  index: 4
+index:2
+bounds:723,152,63,88
 Walk
-  rotate: false
-  xy: 812, 143
-  size: 81, 97
-  orig: 81, 97
-  offset: 0, 0
-  index: 8
+index:7
+bounds:786,151,63,89
 Walk
-  rotate: false
-  xy: 893, 150
-  size: 70, 90
-  orig: 70, 90
-  offset: 0, 0
-  index: 11
+index:9
+bounds:849,150,63,90
 Walk
-  rotate: false
-  xy: 107, 0
-  size: 70, 101
-  orig: 70, 101
-  offset: 0, 0
-  index: 2
+index:5
+bounds:107,11,60,90
 Walk
-  rotate: false
-  xy: 177, 28
-  size: 69, 92
-  orig: 69, 92
-  offset: 0, 0
-  index: 10
+index:1
+bounds:167,33,60,87
 Walk
-  rotate: false
-  xy: 246, 28
-  size: 69, 100
-  orig: 69, 100
-  offset: 0, 0
-  index: 9
+index:10
+bounds:227,51,54,89
 Walk
-  rotate: false
-  xy: 315, 24
-  size: 67, 104
-  orig: 67, 104
-  offset: 0, 0
-  index: 6
+index:6
+bounds:974,152,44,88
