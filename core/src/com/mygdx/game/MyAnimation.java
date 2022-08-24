@@ -4,15 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class MyAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
+    private TextureAtlas atlas;
 
     private float time;
-    private float speed = 200F;
+    private float speed = 100F;
     private float currentPosition = 0;
 
 
@@ -29,8 +31,14 @@ public class MyAnimation {
                 region1[count++] = regions0[i][j];
             }
         }
-
         anim = new Animation<TextureRegion>(1 / 20f, region1);
+        anim.setPlayMode(playMode);
+        time += Gdx.graphics.getDeltaTime();
+    }
+
+    public MyAnimation(String atlasName, Animation.PlayMode playMode) {
+        atlas = new TextureAtlas(atlasName);
+        anim = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("Walk"));
         anim.setPlayMode(playMode);
         time += Gdx.graphics.getDeltaTime();
     }
@@ -86,7 +94,7 @@ public class MyAnimation {
     }
 
     public void dispose() {
-        img.dispose();
+        atlas.dispose();
     }
 
 }
