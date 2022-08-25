@@ -1,6 +1,5 @@
 package com.mygdx.game.screens;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -50,7 +49,6 @@ public class GameScreen implements Screen {
     public void show() {
 
     }
-
 
     @Override
     public void render(float delta) {
