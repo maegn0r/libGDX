@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.screens.GameScreen;
 
-public class MyAnimation {
+public class OgreAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
@@ -16,18 +16,13 @@ public class MyAnimation {
 
     private float time;
     private float speed = 100F;
-    private float startPositionX = 0;
-    private float startPositionY = 0;
-    private float currentPositionX = startPositionX;
-    private float currentPositionY = startPositionY;
+    private float startPositionX;
+    private float startPositionY;
+    private float currentPositionX;
+    private float currentPositionY;
     private float mapEndX;
 
-
-    public void setMapEndX(float mapEndX) {
-        this.mapEndX = mapEndX;
-    }
-
-    public MyAnimation(String name, int col, int row, Animation.PlayMode playMode) {
+    public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
         img = new Texture(name);
         TextureRegion region0 = new TextureRegion(img);
         int xCnt = region0.getRegionWidth() / col;
@@ -45,7 +40,7 @@ public class MyAnimation {
         time += Gdx.graphics.getDeltaTime();
     }
 
-    public MyAnimation(String atlasName, Animation.PlayMode playMode) {
+    public OgreAnimation(String atlasName, Animation.PlayMode playMode) {
         atlas = new TextureAtlas(atlasName);
         anim = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("Walk"));
         anim.setPlayMode(playMode);
@@ -112,6 +107,10 @@ public class MyAnimation {
 
     public void setStartPositionY(float startPositionY) {
         this.startPositionY = startPositionY;
+    }
+
+    public void setMapEndX(float mapEndX) {
+        this.mapEndX = mapEndX;
     }
 
     public void dispose() {

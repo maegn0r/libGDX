@@ -16,13 +16,13 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Main;
-import com.mygdx.game.MyAnimation;
+import com.mygdx.game.OgreAnimation;
 
 public class GameScreen implements Screen {
     private final Main game;
     private SpriteBatch batch;
     private int clickCounter;
-    private MyAnimation animation;
+    private OgreAnimation ogreAnimation;
     private OrthographicCamera camera;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final Rectangle mapSize;
@@ -33,7 +33,7 @@ public class GameScreen implements Screen {
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-        animation = new MyAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
+        ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         TiledMap map = new TmxMapLoader().load("map/map1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -73,17 +73,17 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0, 0, 0, 0);
         float dt = Gdx.graphics.getDeltaTime();
         update(dt);
-        animation.setTime(dt);
+        ogreAnimation.setTime(dt);
 
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
 
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
-        animation.setStartPositionX(mapSize.x);
-        animation.setStartPositionY(mapSize.y);
-        animation.setMapEndX(mapSize.width);
-        animation.render(batch);
+        ogreAnimation.setStartPositionX(mapSize.x);
+        ogreAnimation.setStartPositionY(mapSize.y);
+        ogreAnimation.setMapEndX(mapSize.width);
+        ogreAnimation.render(batch);
         batch.end();
 
         mapRenderer.setView(camera);
@@ -121,11 +121,11 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        animation.dispose();
+        ogreAnimation.dispose();
     }
 
     public void update(float dt) {
-        animation.update(dt);
+        ogreAnimation.update(dt);
     }
 
 
