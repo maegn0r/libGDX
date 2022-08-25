@@ -71,7 +71,7 @@ public class MyAnimation {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(getFrame(), startPositionX+currentPositionX, startPositionY+currentPositionY);
+        batch.draw(getFrame(), startPositionX + currentPositionX, startPositionY + currentPositionY);
     }
 
     public TextureRegion getFrame() {
@@ -102,7 +102,9 @@ public class MyAnimation {
         return this.currentPositionX;
     }
 
-    public float getCurrentPositionY() {return this.currentPositionY;}
+    public float getCurrentPositionY() {
+        return this.currentPositionY;
+    }
 
     public void setStartPositionX(float startPositionX) {
         this.startPositionX = startPositionX;

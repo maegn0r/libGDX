@@ -29,13 +29,12 @@ public class GameScreen implements Screen {
     private final ShapeRenderer shapeRenderer;
 
 
-
     public GameScreen(Main game) {
         this.game = game;
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         animation = new MyAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         TiledMap map = new TmxMapLoader().load("map/map1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
@@ -53,15 +52,16 @@ public class GameScreen implements Screen {
     }
 
 
-
     @Override
     public void render(float delta) {
         camera.update();
         float STEP = 5;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && mapSize.x < (camera.position.x-1)) camera.position.x -= STEP;
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && (mapSize.x + mapSize.width) > (camera.position.x+1)) camera.position.x += STEP;
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && (mapSize.y + mapSize.height > camera.position.y+1)) camera.position.y += STEP;
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && (mapSize.y < camera.position.y-1)) camera.position.y -= STEP;
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && mapSize.x < (camera.position.x - 1)) camera.position.x -= STEP;
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && (mapSize.x + mapSize.width) > (camera.position.x + 1))
+            camera.position.x += STEP;
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && (mapSize.y + mapSize.height > camera.position.y + 1))
+            camera.position.y += STEP;
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && (mapSize.y < camera.position.y - 1)) camera.position.y -= STEP;
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) camera.zoom += 0.01f;
         if (Gdx.input.isKeyPressed(Input.Keys.A) && camera.zoom > 0) camera.zoom -= 0.01f;
