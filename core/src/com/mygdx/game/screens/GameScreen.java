@@ -52,6 +52,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        camera.position.set(ogreAnimation.getCurrentPositionX(),ogreAnimation.getCurrentPositionY()+mapSize.height/2,0);
         camera.update();
         float STEP = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && mapSize.x < (camera.position.x - 1)) camera.position.x -= STEP;
