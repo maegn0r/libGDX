@@ -53,6 +53,7 @@ public class GameScreen implements Screen {
     }
 
 
+
     @Override
     public void render(float delta) {
         camera.update();
@@ -79,6 +80,9 @@ public class GameScreen implements Screen {
 
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
+        animation.setStartPositionX(mapSize.x);
+        animation.setStartPositionY(mapSize.y);
+        animation.setMapEndX(mapSize.width);
         animation.render(batch);
         batch.end();
 
@@ -122,6 +126,11 @@ public class GameScreen implements Screen {
 
     public void update(float dt) {
         animation.update(dt);
+    }
+
+
+    public Rectangle getMapSize() {
+        return mapSize;
     }
 
 }

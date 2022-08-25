@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mygdx.game.screens.GameScreen;
 
 public class MyAnimation {
 
@@ -15,8 +16,16 @@ public class MyAnimation {
 
     private float time;
     private float speed = 100F;
-    private float currentPosition = 0;
+    private float startPositionX = 0;
+    private float startPositionY = 0;
+    private float currentPositionX = startPositionX;
+    private float currentPositionY = startPositionY;
+    private float mapEndX;
 
+
+    public void setMapEndX(float mapEndX) {
+        this.mapEndX = mapEndX;
+    }
 
     public MyAnimation(String name, int col, int row, Animation.PlayMode playMode) {
         img = new Texture(name);
@@ -45,14 +54,14 @@ public class MyAnimation {
 
     public void update(float dt) {
         if (!getFrame().isFlipX()) {
-            currentPosition += speed * dt;
-            if (getCurrentPositionX() + getFrame().getRegionWidth() >= Gdx.graphics.getWidth()) {
+            currentPositionX += speed * dt;
+            if (getCurrentPositionX() + getFrame().getRegionWidth() >= mapEndX) {
                 for (TextureRegion keyFrame : anim.getKeyFrames()) {
                     keyFrame.flip(true, false);
                 }
             }
         } else if (getFrame().isFlipX()) {
-            currentPosition -= speed * dt;
+            currentPositionX -= speed * dt;
             if (getCurrentPositionX() <= 0.0F) {
                 for (TextureRegion keyFrame : anim.getKeyFrames()) {
                     keyFrame.flip(true, false);
@@ -62,7 +71,7 @@ public class MyAnimation {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(getFrame(), currentPosition, 0);
+        batch.draw(getFrame(), startPositionX+currentPositionX, startPositionY+currentPositionY);
     }
 
     public TextureRegion getFrame() {
@@ -90,7 +99,17 @@ public class MyAnimation {
     }
 
     public float getCurrentPositionX() {
-        return this.currentPosition;
+        return this.currentPositionX;
+    }
+
+    public float getCurrentPositionY() {return this.currentPositionY;}
+
+    public void setStartPositionX(float startPositionX) {
+        this.startPositionX = startPositionX;
+    }
+
+    public void setStartPositionY(float startPositionY) {
+        this.startPositionY = startPositionY;
     }
 
     public void dispose() {
