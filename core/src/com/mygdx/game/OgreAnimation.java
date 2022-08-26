@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class MyAnimation {
+public class OgreAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
@@ -15,10 +15,13 @@ public class MyAnimation {
 
     private float time;
     private float speed = 100F;
-    private float currentPosition = 0;
+    private float startPositionX;
+    private float startPositionY;
+    private float currentPositionX;
+    private float currentPositionY;
+    private float mapEndX;
 
-
-    public MyAnimation(String name, int col, int row, Animation.PlayMode playMode) {
+    public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
         img = new Texture(name);
         TextureRegion region0 = new TextureRegion(img);
         int xCnt = region0.getRegionWidth() / col;
@@ -36,7 +39,7 @@ public class MyAnimation {
         time += Gdx.graphics.getDeltaTime();
     }
 
-    public MyAnimation(String atlasName, Animation.PlayMode playMode) {
+    public OgreAnimation(String atlasName, Animation.PlayMode playMode) {
         atlas = new TextureAtlas(atlasName);
         anim = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("Walk"));
         anim.setPlayMode(playMode);
@@ -45,14 +48,14 @@ public class MyAnimation {
 
     public void update(float dt) {
         if (!getFrame().isFlipX()) {
-            currentPosition += speed * dt;
-            if (getCurrentPositionX() + getFrame().getRegionWidth() >= Gdx.graphics.getWidth()) {
+            currentPositionX += speed * dt;
+            if (getCurrentPositionX() + getFrame().getRegionWidth() >= mapEndX) {
                 for (TextureRegion keyFrame : anim.getKeyFrames()) {
                     keyFrame.flip(true, false);
                 }
             }
         } else if (getFrame().isFlipX()) {
-            currentPosition -= speed * dt;
+            currentPositionX -= speed * dt;
             if (getCurrentPositionX() <= 0.0F) {
                 for (TextureRegion keyFrame : anim.getKeyFrames()) {
                     keyFrame.flip(true, false);
@@ -62,7 +65,7 @@ public class MyAnimation {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(getFrame(), currentPosition, 0);
+        batch.draw(getFrame(), startPositionX + currentPositionX, startPositionY + currentPositionY);
     }
 
     public TextureRegion getFrame() {
@@ -90,7 +93,23 @@ public class MyAnimation {
     }
 
     public float getCurrentPositionX() {
-        return this.currentPosition;
+        return this.currentPositionX;
+    }
+
+    public float getCurrentPositionY() {
+        return this.currentPositionY;
+    }
+
+    public void setStartPositionX(float startPositionX) {
+        this.startPositionX = startPositionX;
+    }
+
+    public void setStartPositionY(float startPositionY) {
+        this.startPositionY = startPositionY;
+    }
+
+    public void setMapEndX(float mapEndX) {
+        this.mapEndX = mapEndX;
     }
 
     public void dispose() {

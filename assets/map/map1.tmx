@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="9">
+ <tileset firstgid="1" name="monochrome_tilemap_transparent" tilewidth="16" tileheight="16" spacing="1" tilecount="400" columns="20">
+  <image source="monochrome_tilemap_transparent.png" width="339" height="339"/>
+  <tile id="136">
+   <animation>
+    <frame tileid="163" duration="250"/>
+    <frame tileid="164" duration="250"/>
+    <frame tileid="165" duration="250"/>
+   </animation>
+  </tile>
+  <tile id="378">
+   <animation>
+    <frame tileid="369" duration="100"/>
+    <frame tileid="370" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer id="1" name="Фон" width="32" height="21">
+  <data encoding="base64" compression="zlib">
+   eJzlVMENwjAMdJ60M9AOwAuYAJAQ7ACT8OXTSdgBdmAmXKkW5uo4VErLg5NOTp0qd75GJfIREvs5cWCxY+ivp/JwYqFz6K/Fw5RZxBBoPC+x/D0vGpfw5pU+qft6reHl32JvEPVRDz1hbwhQTzzIMXK+NS/mIX2Nofmjh0D9/K0c9L5GKn/PAykPsVmtb5EDoo95pyrOn8rcun/6Hnr3P3YnNDBz3B+q762t+VO4ORR9PB+zGOP7C1Az9Q/4Zv4mr0WaMQtm6bxTKJYZPbTac2bFrB3tStVa+Uj5RtzhudVeMldkZy8zV4q1US08jN6zq01H0V4zF93ehrn9EXeRWf4JLyahZWs=
+  </data>
+ </layer>
+ <objectgroup id="3" name="объекты">
+  <object id="1" name="камера" x="186" y="144">
+   <point/>
+  </object>
+  <object id="4" name="граница" x="0.666667" y="-1.33333" width="514" height="320"/>
+ </objectgroup>
+ <layer id="2" name="Слой2" width="32" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwXAGLUh4KNv/gERMbftHAfUAAJVVDyU=
+  </data>
+ </layer>
+</map>
