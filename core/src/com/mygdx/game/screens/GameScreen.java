@@ -52,7 +52,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        camera.position.set(ogreAnimation.getCurrentPositionX(),ogreAnimation.getCurrentPositionY()+mapSize.height/2,0);
+        if (Gdx.input.isKeyPressed(Input.Keys.F)){
+        camera.position.set(ogreAnimation.getCurrentPositionX(),ogreAnimation.getCurrentPositionY()+mapSize.height/2,0);}
         camera.update();
         float STEP = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && mapSize.x < (camera.position.x - 1)) camera.position.x -= STEP;
@@ -77,14 +78,6 @@ public class GameScreen implements Screen {
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
 
-        batch.begin();
-        batch.setProjectionMatrix(camera.combined);
-        ogreAnimation.setStartPositionX(mapSize.x);
-        ogreAnimation.setStartPositionY(mapSize.y);
-        ogreAnimation.setMapEndX(mapSize.width);
-        ogreAnimation.render(batch);
-        batch.end();
-
         mapRenderer.setView(camera);
         mapRenderer.render();
 
@@ -93,6 +86,14 @@ public class GameScreen implements Screen {
         shapeRenderer.setColor(Color.SKY);
         shapeRenderer.rect(mapSize.x, mapSize.y, mapSize.width, mapSize.height);
         shapeRenderer.end();
+
+        batch.begin();
+        batch.setProjectionMatrix(camera.combined);
+        ogreAnimation.setStartPositionX(mapSize.x);
+        ogreAnimation.setStartPositionY(mapSize.y);
+        ogreAnimation.setMapEndX(mapSize.width);
+        ogreAnimation.render(batch);
+        batch.end();
 
     }
 
