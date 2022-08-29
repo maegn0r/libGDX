@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="9">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="9">
  <tileset firstgid="1" name="monochrome_tilemap_transparent" tilewidth="16" tileheight="16" spacing="1" tilecount="400" columns="20">
   <image source="monochrome_tilemap_transparent.png" width="339" height="339"/>
   <tile id="136">
@@ -18,7 +18,7 @@
  </tileset>
  <layer id="1" name="Фон" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJzlVMENwjAMdJ60M9AOwAuYAJAQ7ACT8OXTSdgBdmAmXKkW5uo4VErLg5NOTp0qd75GJfIREvs5cWCxY+ivp/JwYqFz6K/Fw5RZxBBoPC+x/D0vGpfw5pU+qft6reHl32JvEPVRDz1hbwhQTzzIMXK+NS/mIX2Nofmjh0D9/K0c9L5GKn/PAykPsVmtb5EDoo95pyrOn8rcun/6Hnr3P3YnNDBz3B+q762t+VO4ORR9PB+zGOP7C1Az9Q/4Zv4mr0WaMQtm6bxTKJYZPbTac2bFrB3tStVa+Uj5RtzhudVeMldkZy8zV4q1US08jN6zq01H0V4zF93ehrn9EXeRWf4JLyahZWs=
+   eJzlVMENwjAMdJ60M9DOAEwASAh2gEn48ukk7AA7MBOuVKvm6jhUSsuDk05xkyh3vkQl8hES6zlxZLFTGNZzeTiz0CUMa/EwZxYxBJrOSyx/z4vGNfS80Sf1vK41vPxbHAyiPuqhJ5wbA9QTD3KMnG/1i3nIvMbY/NFDoGH+Vg56XSOVv+eBlIdYr9Zd5IDoY96pEftPZW69P/0OvfcfexMamDmuj9X3aqv/FO4ORR/PxyymuH8Baqb+Ad/03+S1SAtmwSydPYVimdFDq71kVsza0a7UWCsfKd+IB3y32ivmmuzspedKsTZGC09j7tWNTUfR3qg9W+buR9xHevknvAHkumVA
   </data>
  </layer>
  <objectgroup id="3" name="объекты">
@@ -30,6 +30,11 @@
  <layer id="2" name="Слой2" width="32" height="21">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwXAGLUh4KNv/gERMbftHAfUAAJVVDyU=
+  </data>
+ </layer>
+ <layer id="4" name="Слой3" width="32" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B40MYIwZoD7ZBRMApGwSggEYDKrlEwCrQH2gGjAAwAQ8UB6g==
   </data>
  </layer>
 </map>

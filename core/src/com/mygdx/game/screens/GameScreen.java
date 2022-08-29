@@ -26,6 +26,9 @@ public class GameScreen implements Screen {
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final Rectangle mapSize;
     private final ShapeRenderer shapeRenderer;
+    private final int [] bg;
+    private final int [] l1;
+
 
 
     public GameScreen(Main game) {
@@ -34,8 +37,12 @@ public class GameScreen implements Screen {
         shapeRenderer = new ShapeRenderer();
         ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         TiledMap map = new TmxMapLoader().load("map/map1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+        bg = new int[]{map.getLayers().getIndex("Фон")};
+        l1 = new int[]{map.getLayers().getIndex("Слой2"), map.getLayers().getIndex("Слой3")};
 
         RectangleMapObject rectMapObject = (RectangleMapObject) map.getLayers().get("объекты").getObjects().get("камера");
         camera.position.x = rectMapObject.getRectangle().x;
@@ -54,7 +61,9 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.F)){
         camera.position.set(ogreAnimation.getCurrentPositionX(),ogreAnimation.getCurrentPositionY()+mapSize.height/2,0);}
+
         camera.update();
+
         float STEP = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && mapSize.x < (camera.position.x - 1)) camera.position.x -= STEP;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && (mapSize.x + mapSize.width) > (camera.position.x + 1))
@@ -71,6 +80,10 @@ public class GameScreen implements Screen {
             game.setScreen(new MenuScreen(game));
         }
         ScreenUtils.clear(0, 0, 0, 0);
+
+        mapRenderer.setView(camera);
+        mapRenderer.render(bg);
+
         float dt = Gdx.graphics.getDeltaTime();
         update(dt);
         ogreAnimation.setTime(dt);
@@ -78,8 +91,6 @@ public class GameScreen implements Screen {
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
 
-        mapRenderer.setView(camera);
-        mapRenderer.render();
 
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -94,6 +105,8 @@ public class GameScreen implements Screen {
         ogreAnimation.setMapEndX(mapSize.width);
         ogreAnimation.render(batch);
         batch.end();
+
+        mapRenderer.render(l1);
 
     }
 
