@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
 public class OgreAnimation {
 
@@ -15,11 +16,12 @@ public class OgreAnimation {
 
     private float time;
     private float speed = 100F;
-    private float startPositionX;
-    private float startPositionY;
+    private float heroX;
+    private float heroY;
     private float currentPositionX;
     private float currentPositionY;
     private float mapEndX;
+    private Rectangle heroRect;
 
     public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
         img = new Texture(name);
@@ -65,7 +67,7 @@ public class OgreAnimation {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(getFrame(), startPositionX + currentPositionX, startPositionY + currentPositionY);
+        batch.draw(getFrame(), heroX, heroY, heroRect.width,heroRect.height);
     }
 
     public TextureRegion getFrame() {
@@ -100,16 +102,24 @@ public class OgreAnimation {
         return this.currentPositionY;
     }
 
-    public void setStartPositionX(float startPositionX) {
-        this.startPositionX = startPositionX;
+    public void setHeroX(float heroX) {
+        this.heroX = heroX;
     }
 
-    public void setStartPositionY(float startPositionY) {
-        this.startPositionY = startPositionY;
+    public void setHeroY(float heroY) {
+        this.heroY = heroY;
     }
 
     public void setMapEndX(float mapEndX) {
         this.mapEndX = mapEndX;
+    }
+
+    public Rectangle getHeroRect() {
+        return heroRect;
+    }
+
+    public void setHeroRect(Rectangle heroRect) {
+        this.heroRect = heroRect;
     }
 
     public void dispose() {
