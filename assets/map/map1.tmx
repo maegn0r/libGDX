@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="9">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="30">
  <tileset firstgid="1" name="monochrome_tilemap_transparent" tilewidth="16" tileheight="16" spacing="1" tilecount="400" columns="20">
   <image source="monochrome_tilemap_transparent.png" width="339" height="339"/>
   <tile id="136">
@@ -18,18 +18,119 @@
  </tileset>
  <layer id="1" name="Фон" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJzlVMENwjAMdJ60M9AOwAuYAJAQ7ACT8OXTSdgBdmAmXKkW5uo4VErLg5NOTp0qd75GJfIREvs5cWCxY+ivp/JwYqFz6K/Fw5RZxBBoPC+x/D0vGpfw5pU+qft6reHl32JvEPVRDz1hbwhQTzzIMXK+NS/mIX2Nofmjh0D9/K0c9L5GKn/PAykPsVmtb5EDoo95pyrOn8rcun/6Hnr3P3YnNDBz3B+q762t+VO4ORR9PB+zGOP7C1Az9Q/4Zv4mr0WaMQtm6bxTKJYZPbTac2bFrB3tStVa+Uj5RtzhudVeMldkZy8zV4q1US08jN6zq01H0V4zF93ehrn9EXeRWf4JLyahZWs=
+   eJzlVMENwjAMdJ60M9DOAEwASAh2gEn48ukk7AA7MBOuVKvm6jhUSsuDk05xkyh3vkQl8hES6zlxZLFTGNZzeTiz0CUMa/EwZxYxBJrOSyx/z4vGNfS80Sf1vK41vPxbHAyiPuqhJ5wbA9QTD3KMnG/1i3nIvMbY/NFDoGH+Vg56XSOVv+eBlIdYr9Zd5IDoY96pEftPZW69P/0OvfcfexMamDmuj9X3aqv/FO4ORR/PxyymuH8Baqb+Ad/03+S1SAtmwSydPYVimdFDq71kVsza0a7UWCsfKd+IB3y32ivmmuzspedKsTZGC09j7tWNTUfR3qg9W+buR9xHevknvAHkumVA
   </data>
  </layer>
  <objectgroup id="3" name="объекты">
-  <object id="1" name="камера" x="186" y="144">
-   <point/>
+  <object id="18" x="176.5" y="81" width="78.25" height="15.5">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
   </object>
-  <object id="4" name="граница" x="0.666667" y="-1.33333" width="514" height="320"/>
+  <object id="17" x="177.25" y="92.25" width="15" height="18.5">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="10" x="2.66667" y="288" width="508.667" height="29.3333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="11" x="432.5" y="239.5" width="48" height="50.75">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="12" x="448.364" y="224.545" width="47.4545" height="31.6364">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="13" x="48.5" y="272.5" width="47" height="16.75">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="14" x="65" y="256.5" width="140.5" height="33">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="15" x="80.5" y="240.25" width="63.25" height="19.375">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="19" x="241.5" y="84.5" width="14" height="27">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="22" x="257.25" y="96.75" width="13.75" height="30">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="24" x="273.25" y="112.75" width="13.5" height="78.25">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="25" x="177.25" y="161" width="108.75" height="31">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="29" x="0.666667" y="0.666667" width="8.66667" height="333.333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="3"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="сеттинг">
+  <object id="27" name="Герой1" x="156.727" y="47.5" width="15.1364" height="27.9545" visible="0">
+   <properties>
+    <property name="BodyType" value="DynamicBody"/>
+    <property name="gravityScale" type="float" value="10"/>
+    <property name="restitution" type="float" value="0.5"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="2" name="Слой2" width="32" height="21">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwXAGLUh4KNv/gERMbftHAfUAAJVVDyU=
+  </data>
+ </layer>
+ <layer id="4" name="Слой3" width="32" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B40MYIwZoD7ZBRMApGwSggEYDKrlEwCrQH2gGjAAwAQ8UB6g==
   </data>
  </layer>
 </map>
