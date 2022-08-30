@@ -13,7 +13,7 @@ public class OgreAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
-    private TextureAtlas atlas;
+    private TextureAtlas atlas; //--//
 
     private float time;
     private float heroX;
