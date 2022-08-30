@@ -115,7 +115,7 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="сеттинг">
-  <object id="27" name="Герой1" x="156.727" y="47.5" width="16.7727" height="27.9545">
+  <object id="27" name="Герой1" x="156.727" y="47.5" width="15.1364" height="27.9545" visible="0">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="10"/>

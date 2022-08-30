@@ -25,18 +25,15 @@ public class GameScreen implements Screen {
     private OgreAnimation ogreAnimation;
     private OrthographicCamera camera;
     private final OrthogonalTiledMapRenderer mapRenderer;
-    private final ShapeRenderer shapeRenderer;
     private final int[] bg;
     private final int[] l1;
     private PhysX physX;
     private Body body;
 
 
-
     public GameScreen(Main game) {
         this.game = game;
         batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
         ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.67f;
@@ -67,17 +64,13 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
-//        if (Gdx.input.isKeyPressed(Input.Keys.F)) {
-//            camera.position.set(ogreAnimation.getCurrentPositionX(), ogreAnimation.getCurrentPositionY(), 0);
-//        }
-
         camera.position.x = body.getPosition().x;
         camera.position.y = body.getPosition().y;
         camera.update();
 
         float STEP = 5;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(10000,0),true);
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) camera.position.x += STEP;
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-70000, 0), true);
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(70000, 0), true);
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) camera.position.y += STEP;
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
 
@@ -93,27 +86,18 @@ public class GameScreen implements Screen {
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
 
-        float dt = Gdx.graphics.getDeltaTime();
-        update(dt);
-        ogreAnimation.setTime(dt);
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            update();
+            ogreAnimation.setTime(Gdx.graphics.getDeltaTime());
+        }
 
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
 
-
-//        shapeRenderer.setProjectionMatrix(camera.combined);
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//        shapeRenderer.setColor(Color.SKY);
-//        for (int i = 0; i < objects.size; i++) {
-//            Rectangle mapSize = objects.get(i).getRectangle();
-//            shapeRenderer.rect(mapSize.x, mapSize.y, mapSize.width, mapSize.height);
-//        }
-//        shapeRenderer.end();
-
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
-        ogreAnimation.setHeroX(body.getPosition().x - ogreAnimation.getHeroRect().width/2);
-        ogreAnimation.setHeroY(body.getPosition().y - ogreAnimation.getHeroRect().height/2);
+        ogreAnimation.setHeroX(body.getPosition().x - ogreAnimation.getHeroRect().width / 2);
+        ogreAnimation.setHeroY(body.getPosition().y - ogreAnimation.getHeroRect().height / 2);
         ogreAnimation.render(batch);
         batch.end();
 
@@ -151,13 +135,8 @@ public class GameScreen implements Screen {
         ogreAnimation.dispose();
     }
 
-    public void update(float dt) {
-        ogreAnimation.update(dt);
+    public void update() {
+        ogreAnimation.update();
     }
-
-
-//    public Rectangle getMapSize() {
-//        return mapSize;
-//    }
 
 }

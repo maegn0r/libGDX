@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,12 +16,8 @@ public class OgreAnimation {
     private TextureAtlas atlas;
 
     private float time;
-    private float speed = 100F;
     private float heroX;
     private float heroY;
-    private float currentPositionX;
-    private float currentPositionY;
-    private float mapEndX;
     private Rectangle heroRect;
 
     public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
@@ -48,26 +45,23 @@ public class OgreAnimation {
         time += Gdx.graphics.getDeltaTime();
     }
 
-    public void update(float dt) {
+    public void update() {
         if (!getFrame().isFlipX()) {
-            currentPositionX += speed * dt;
-            if (getCurrentPositionX() + getFrame().getRegionWidth() >= mapEndX) {
-                for (TextureRegion keyFrame : anim.getKeyFrames()) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+                for (TextureRegion keyFrame : this.anim.getKeyFrames()) {
                     keyFrame.flip(true, false);
                 }
             }
-        } else if (getFrame().isFlipX()) {
-            currentPositionX -= speed * dt;
-            if (getCurrentPositionX() <= 0.0F) {
-                for (TextureRegion keyFrame : anim.getKeyFrames()) {
+        } else if (getFrame().isFlipX())
+            if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+                for (TextureRegion keyFrame : this.anim.getKeyFrames()) {
                     keyFrame.flip(true, false);
                 }
             }
-        }
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(getFrame(), heroX, heroY, heroRect.width,heroRect.height);
+        batch.draw(getFrame(), heroX, heroY, heroRect.width, heroRect.height);
     }
 
     public TextureRegion getFrame() {
@@ -90,28 +84,12 @@ public class OgreAnimation {
         anim.setPlayMode(playMode);
     }
 
-    public float getSpeed() {
-        return this.speed;
-    }
-
-    public float getCurrentPositionX() {
-        return this.currentPositionX;
-    }
-
-    public float getCurrentPositionY() {
-        return this.currentPositionY;
-    }
-
     public void setHeroX(float heroX) {
         this.heroX = heroX;
     }
 
     public void setHeroY(float heroY) {
         this.heroY = heroY;
-    }
-
-    public void setMapEndX(float mapEndX) {
-        this.mapEndX = mapEndX;
     }
 
     public Rectangle getHeroRect() {
