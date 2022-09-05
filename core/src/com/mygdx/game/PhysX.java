@@ -32,7 +32,7 @@ public class PhysX {
         polygonShape.setAsBox(rect.width / 2, rect.height / 2);
 
         fdef.shape = polygonShape;
-        fdef.friction = 0.3F;
+        fdef.friction = 0.4F;
         fdef.density = 1;
         fdef.restitution = (float) object.getProperties().get("restitution");
 
@@ -41,9 +41,10 @@ public class PhysX {
         String name = object.getName();
         body.createFixture(fdef).setUserData(name);
         if (name != null && name.equals("Герой1")){
-            polygonShape.setAsBox(rect.width / 6, rect.height,new Vector2(0, -rect.width*1.5F),0);
+            polygonShape.setAsBox(rect.width/2.2f , rect.height/5,new Vector2(0, -rect.width/1.5f),0);
             body.createFixture(fdef).setUserData("ноги");
             body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
+
         }
         polygonShape.dispose();
         return body;

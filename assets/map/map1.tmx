@@ -18,7 +18,7 @@
  </tileset>
  <layer id="1" name="Фон" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJzlVNsNwjAMdD4pM9DOAEwASAh2gEn45aeTsAPswEw4Ui3M1XGolJYPTjrlqdz5apXIR8icl8SBxY6hP5/Kw4mFzqE/Fw9TZpFCoPG8pPL3vGhcwptX+qTe13MNL/+IvUHURz30pNdDgXriQZ6S9616MQ+sPWJo/ughUD9/Kwd9rpHL3/NAyoNVq6VfCqKPeedGRC5zq/90H3r9n+oJDcwcz4fqe/NUD3q4ORR9fB+zGOP7C1Az9w/4xkNb2OOMWTHnzp1KcV7QQ9ReMGtm42jXamyUj5xvxB3WUXvJXJGdvdRcKzbGaOFh7D27se0o2mt1Z8Pc/oi7RC3/hBcmHGLM
+   eJzlVMENwjAMdJ4tM9DOAEwASAh2gEn48ukk7AA7MBOpFIvDcZxWSsuDk05Omyh3vlolsuEy+yVx9GInF6/n8nD2QhcXr9nDnFmk4Gg6L6n8LS+Iq/vwRt/E97hGWPn3OCiU+lJPesLnsZB67IGv4vu1fmUesvceY/OXHhzF+Ws54D4il7/lgcCD1qumXwqsL/POVYlc5tr84Rxa85+aCYTMXO6P1bfWqRm0cDfI+vJ+mcUU358hNXP/gCEeuoL+qsA6c64GLgp66LWXnk1Gu4Hagg+uQ/FQ9Feea9Kz554bYKtUDU/l3SvULrAK2hs4s/Xc/Yj7RC//hDdpQWJv
   </data>
  </layer>
  <objectgroup id="3" name="объекты">
@@ -36,21 +36,14 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="10" name="поверхность" x="2.66667" y="288" width="508.667" height="29.3333">
+  <object id="10" name="поверхность" x="2.66667" y="288" width="508.667" height="44">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="11" name="поверхность" x="432.5" y="239.5" width="48" height="50.75">
-   <properties>
-    <property name="BodyType" value="StaticBody"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="12" name="поверхность" x="448.364" y="224.545" width="47.4545" height="31.6364">
+  <object id="11" name="поверхность" x="431.833" y="225.5" width="46.6667" height="63.4167">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
@@ -155,7 +148,7 @@
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="42" x="501.667" y="2.00017" width="8.66667" height="333.333">
+  <object id="42" x="504.333" y="2.00017" width="8.66667" height="333.333">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
@@ -164,7 +157,7 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="сеттинг">
-  <object id="27" name="Герой1" x="152.06" y="47.5" width="19.8031" height="27.9545">
+  <object id="27" name="Герой1" x="145.394" y="35.5" width="26.4697" height="39.9545">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="3"/>

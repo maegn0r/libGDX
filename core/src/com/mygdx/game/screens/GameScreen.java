@@ -95,10 +95,10 @@ public class GameScreen implements Screen {
         camera.update();
 
         float STEP = 5;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-70000, 0), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(70000, 0), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-            if (playerOnGround){body.applyForceToCenter(new Vector2(0, 70000), true);}}
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-80000, 0), true);
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(80000, 0), true);
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround){body.applyForceToCenter(new Vector2(0, 80000), true);}
+        else {body.applyForce(new Vector2(0, -60000), new Vector2(body.getPosition().x, 0),true);}
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
 
 
