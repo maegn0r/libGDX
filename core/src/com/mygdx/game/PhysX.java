@@ -41,7 +41,7 @@ public class PhysX {
         String name = object.getName();
         body.createFixture(fdef).setUserData(name);
         if (name != null && name.equals("Герой1")){
-            polygonShape.setAsBox(rect.width / 6, rect.height,new Vector2(0, -rect.width),0);
+            polygonShape.setAsBox(rect.width / 6, rect.height,new Vector2(0, -rect.width*1.5F),0);
             body.createFixture(fdef).setUserData("ноги");
             body.getFixtureList().get(body.getFixtureList().size-1).setSensor(true);
         }

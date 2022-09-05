@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Main;
+import com.mygdx.game.MyContList;
 import com.mygdx.game.OgreAnimation;
 import com.mygdx.game.PhysX;
 
@@ -29,18 +30,33 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private final Sound startGameSound;
     private final OrthogonalTiledMapRenderer mapRenderer;
+    private final MyContList contList;
     private final int[] bg;
     private final int[] l1;
     private PhysX physX;
     private Body body;
     public static ArrayList <Body> bodies;
-    public static boolean youGetMaxJumpHeight;
+    public static boolean GameScreenMaxJumpHeight;
+    public static boolean isPlayerOnGround() {
+        return playerOnGround;
+    }
 
+    private static boolean playerOnGround;
+
+    public static void setPlayerOnGround(boolean playerOnGround) {
+        GameScreen.playerOnGround = playerOnGround;
+    }
+
+
+    public static void setGameScreenMaxJumpHeight(boolean gameScreenMaxJumpHeight) {
+        GameScreenMaxJumpHeight = gameScreenMaxJumpHeight;
+    }
 
     public GameScreen(Main game) {
         bodies = new ArrayList<>();
         this.game = game;
         batch = new SpriteBatch();
+        this.contList = new MyContList();
         ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.67f;
@@ -81,9 +97,9 @@ public class GameScreen implements Screen {
         float STEP = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-70000, 0), true);
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(70000, 0), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) body.applyForceToCenter(new Vector2(0, 70000), true);
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+            if (playerOnGround){body.applyForceToCenter(new Vector2(0, 70000), true);}}
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
-
 
 
 
@@ -118,6 +134,7 @@ public class GameScreen implements Screen {
 
         physX.step();
         physX.debugDraw(camera);
+        System.out.println(isPlayerOnGround());
 
         for (int i = 0; i < bodies.size(); i++) {
             physX.destroyBody(bodies.get(i));

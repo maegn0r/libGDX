@@ -20,6 +20,7 @@ public class OgreAnimation {
     private float heroY;
     private Rectangle heroRect;
 
+
     public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
         img = new Texture(name);
         TextureRegion region0 = new TextureRegion(img);

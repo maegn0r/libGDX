@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="42">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="43">
  <tileset firstgid="1" name="monochrome_tilemap_transparent" tilewidth="16" tileheight="16" spacing="1" tilecount="400" columns="20">
   <image source="monochrome_tilemap_transparent.png" width="339" height="339"/>
   <tile id="136">
@@ -18,7 +18,7 @@
  </tileset>
  <layer id="1" name="Фон" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJzlVMENwjAMdJ60M9DOAEwASAh2gEn48ukk7AA7MBOuVKvm6jhUSsuDk05xkyh3vkQl8hES6zlxZLFTGNZzeTiz0CUMa/EwZxYxBJrOSyx/z4vGNfS80Sf1vK41vPxbHAyiPuqhJ5wbA9QTD3KMnG/1i3nIvMbY/NFDoGH+Vg56XSOVv+eBlIdYr9Zd5IDoY96pEftPZW69P/0OvfcfexMamDmuj9X3aqv/FO4ORR/PxyymuH8Baqb+Ad/03+S1SAtmwSydPYVimdFDq71kVsza0a7UWCsfKd+IB3y32ivmmuzspedKsTZGC09j7tWNTUfR3qg9W+buR9xHevknvAHkumVA
+   eJzlVNsNwjAMdD4pM9DOAEwASAh2gEn45aeTsAPswEw4Ui3M1XGolJYPTjrlqdz5apXIR8icl8SBxY6hP5/Kw4mFzqE/Fw9TZpFCoPG8pPL3vGhcwptX+qTe13MNL/+IvUHURz30pNdDgXriQZ6S9616MQ+sPWJo/ughUD9/Kwd9rpHL3/NAyoNVq6VfCqKPeedGRC5zq/90H3r9n+oJDcwcz4fqe/NUD3q4ORR9fB+zGOP7C1Az9w/4xkNb2OOMWTHnzp1KcV7QQ9ReMGtm42jXamyUj5xvxB3WUXvJXJGdvdRcKzbGaOFh7D27se0o2mt1Z8Pc/oi7RC3/hBcmHGLM
   </data>
  </layer>
  <objectgroup id="3" name="объекты">
@@ -155,13 +155,20 @@
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
+  <object id="42" x="501.667" y="2.00017" width="8.66667" height="333.333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="5" name="сеттинг">
-  <object id="27" name="Герой1" x="156.727" y="47.5" width="15.1364" height="27.9545">
+  <object id="27" name="Герой1" x="152.06" y="47.5" width="19.8031" height="27.9545">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
-    <property name="gravityScale" type="float" value="10"/>
-    <property name="restitution" type="float" value="0.5"/>
+    <property name="gravityScale" type="float" value="3"/>
+    <property name="restitution" type="float" value="0.001"/>
    </properties>
   </object>
  </objectgroup>
