@@ -101,7 +101,6 @@ public class MenuScreen implements Screen {
         this.img.dispose();
         this.shapeRenderer.dispose();
         this.music.dispose();
-//        this.startGameSound.dispose();
         this.missClickOnMenuScreenSound.dispose();
     }
 

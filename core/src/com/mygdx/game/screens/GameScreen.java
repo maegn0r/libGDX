@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -19,7 +20,6 @@ import com.mygdx.game.Main;
 import com.mygdx.game.MyContList;
 import com.mygdx.game.OgreAnimation;
 import com.mygdx.game.PhysX;
-
 import java.util.ArrayList;
 
 public class GameScreen implements Screen {
@@ -29,28 +29,15 @@ public class GameScreen implements Screen {
     private OgreAnimation ogreAnimation;
     private OrthographicCamera camera;
     private final Sound startGameSound;
+    private final Music music;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final MyContList contList;
     private final int[] bg;
     private final int[] l1;
     private PhysX physX;
     private Body body;
-    public static ArrayList <Body> bodies;
-    public static boolean GameScreenMaxJumpHeight;
-    public static boolean isPlayerOnGround() {
-        return playerOnGround;
-    }
-
+    public static ArrayList<Body> bodies;
     private static boolean playerOnGround;
-
-    public static void setPlayerOnGround(boolean playerOnGround) {
-        GameScreen.playerOnGround = playerOnGround;
-    }
-
-
-    public static void setGameScreenMaxJumpHeight(boolean gameScreenMaxJumpHeight) {
-        GameScreenMaxJumpHeight = gameScreenMaxJumpHeight;
-    }
 
     public GameScreen(Main game) {
         bodies = new ArrayList<>();
@@ -66,6 +53,11 @@ public class GameScreen implements Screen {
 
         startGameSound = Gdx.audio.newSound(Gdx.files.internal("start_game.mp3"));
         startGameSound.play();
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("game_music.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.03f);
+        music.play();
 
         bg = new int[]{map.getLayers().getIndex("Фон")};
         l1 = new int[]{map.getLayers().getIndex("Слой2"), map.getLayers().getIndex("Слой3")};
@@ -97,11 +89,15 @@ public class GameScreen implements Screen {
         float STEP = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-80000, 0), true);
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(80000, 0), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {{body.setGravityScale(-15);}}
-        else {body.setGravityScale(3);
-        body.setFixedRotation(true);}
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
+            {
+                body.setGravityScale(-15);
+            }
+        } else {
+            body.setGravityScale(3);
+            body.setFixedRotation(true);
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
-
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) camera.zoom += 0.01f;
@@ -169,6 +165,7 @@ public class GameScreen implements Screen {
         batch.dispose();
         ogreAnimation.dispose();
         startGameSound.dispose();
+        music.dispose();
     }
 
     public void update() {
@@ -176,5 +173,12 @@ public class GameScreen implements Screen {
     }
 
 
+    public static void setPlayerOnGround(boolean playerOnGround) {
+        GameScreen.playerOnGround = playerOnGround;
+    }
+
+    public static boolean isPlayerOnGround() {
+        return playerOnGround;
+    }
 
 }
