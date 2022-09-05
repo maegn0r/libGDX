@@ -13,12 +13,13 @@ public class OgreAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
-    private TextureAtlas atlas;
+    private TextureAtlas atlas; //--//
 
     private float time;
     private float heroX;
     private float heroY;
     private Rectangle heroRect;
+
 
     public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
         img = new Texture(name);
