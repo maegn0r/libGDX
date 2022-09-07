@@ -6,7 +6,11 @@ import com.mygdx.game.screens.GameScreen;
 
 public class MyContList implements ContactListener {
 
+    private int counter;
 
+    public boolean isOnGroung(){
+        return counter > 0;
+    };
 
     @Override
     public void beginContact(Contact contact) {
@@ -24,9 +28,9 @@ public class MyContList implements ContactListener {
                 GameScreen.bodies.add(a.getBody());
             }
             if (tmpA.equals("ноги") && tmpB.equals("поверхность")) {
-                GameScreen.setPlayerOnGround(true);}
+                counter++;}
             if (tmpB.equals("ноги") && tmpA.equals("поверхность")){
-                GameScreen.setPlayerOnGround(true);}
+                counter++;}
             }}
 
 
@@ -40,9 +44,9 @@ public class MyContList implements ContactListener {
             String tmpA = (String) a.getUserData();
             String tmpB = (String) b.getUserData();
         if (tmpA.equals("ноги") && tmpB.equals("поверхность")) {
-            GameScreen.setPlayerOnGround(false);}
+            counter--;}
         if (tmpB.equals("ноги") && tmpA.equals("поверхность")){
-            GameScreen.setPlayerOnGround(false);}
+            counter--;}
     }}
 
 

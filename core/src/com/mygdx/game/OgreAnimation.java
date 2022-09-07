@@ -10,17 +10,12 @@ public class OgreAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
-    private TextureAtlas atlas; //--//
-    private SpriteBatch batch;
-
+    private TextureAtlas atlas;
     private float time;
-    private float heroX;
-    private float heroY;
     private Rectangle heroRect;
 
 
     public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
-        batch = new SpriteBatch();
         img = new Texture(name);
         TextureRegion region0 = new TextureRegion(img);
         int xCnt = region0.getRegionWidth() / col;
@@ -60,17 +55,6 @@ public class OgreAnimation {
             }
     }
 
-//    public void render() {
-////        batch.draw(getFrame(), heroX, heroY);
-//        Sprite spr = new Sprite(getFrame());
-//        spr.setOriginCenter();
-//        spr.scale(2);
-//        spr.setPosition(heroX,heroY);
-//        this.batch.begin();
-//        spr.draw(batch);
-//        batch.end();
-//    }
-
     public TextureRegion getFrame() {
         return anim.getKeyFrame(time);
     }
@@ -89,14 +73,6 @@ public class OgreAnimation {
 
     public void setPlayMode(Animation.PlayMode playMode) {
         anim.setPlayMode(playMode);
-    }
-
-    public void setHeroX(float heroX) {
-        this.heroX = heroX;
-    }
-
-    public void setHeroY(float heroY) {
-        this.heroY = heroY;
     }
 
     public Rectangle getHeroRect() {

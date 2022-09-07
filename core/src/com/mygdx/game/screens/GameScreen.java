@@ -18,7 +18,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Main;
-import com.mygdx.game.MyContList;
 import com.mygdx.game.OgreAnimation;
 import com.mygdx.game.PhysX;
 import java.util.ArrayList;
@@ -32,22 +31,20 @@ public class GameScreen implements Screen {
     private final Sound startGameSound;
     private final Music music;
     private final OrthogonalTiledMapRenderer mapRenderer;
-    private final MyContList contList;
+
     private final int[] bg;
     private final int[] l1;
     private PhysX physX;
     private Body body;
     public static ArrayList<Body> bodies;
-    private static boolean playerOnGround;
 
     public GameScreen(Main game) {
         bodies = new ArrayList<>();
         this.game = game;
         batch = new SpriteBatch();
-        this.contList = new MyContList();
         ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.zoom = 0.25f;
+        camera.zoom = 0.35f;
 
         TiledMap map = new TmxMapLoader().load("map/map1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -77,7 +74,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -90,7 +86,7 @@ public class GameScreen implements Screen {
         float STEP = 5;
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-0.70f, 0), true);
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(0.70f, 0), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && physX.getContList().isOnGroung()) {
             {
                 body.setGravityScale(-15);
             }
@@ -113,10 +109,10 @@ public class GameScreen implements Screen {
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
 
+
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            update();
-            ogreAnimation.setTime(Gdx.graphics.getDeltaTime());
-        }
+            ogreAnimation.update();
+            ogreAnimation.setTime(Gdx.graphics.getDeltaTime());}
 
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
@@ -128,7 +124,7 @@ public class GameScreen implements Screen {
         spr.setOriginCenter();
         spr.scale(0.40F);
         spr.setPosition(x,y);
-        this.batch.begin();
+        batch.begin();
         spr.draw(batch);
         batch.end();
 
@@ -136,8 +132,6 @@ public class GameScreen implements Screen {
 
         physX.step();
         physX.debugDraw(camera);
-        System.out.println(isPlayerOnGround());
-
         for (int i = 0; i < bodies.size(); i++) {
             physX.destroyBody(bodies.get(i));
         }
@@ -171,19 +165,6 @@ public class GameScreen implements Screen {
         ogreAnimation.dispose();
         startGameSound.dispose();
         music.dispose();
-    }
-
-    public void update() {
-        ogreAnimation.update();
-    }
-
-
-    public static void setPlayerOnGround(boolean playerOnGround) {
-        GameScreen.playerOnGround = playerOnGround;
-    }
-
-    public static boolean isPlayerOnGround() {
-        return playerOnGround;
     }
 
 }

@@ -10,11 +10,15 @@ public class PhysX {
     private final World world;
     private final Box2DDebugRenderer debugRenderer;
     public final float PPM = 100;
+    private final MyContList contList;
+
 
     public PhysX() {
         world = new World(new Vector2(0, -9.81f), true);
-        world.setContactListener(new MyContList());
+        contList = new MyContList();
+        world.setContactListener(contList);
         debugRenderer = new Box2DDebugRenderer();
+
     }
 
     public Body addObject(RectangleMapObject object) {
@@ -71,4 +75,9 @@ public class PhysX {
     public void destroyBody(Body body) {
         world.destroyBody(body);
     }
+
+    public MyContList getContList() {
+        return contList;
+    }
+
 }
