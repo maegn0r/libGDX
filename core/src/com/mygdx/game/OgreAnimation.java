@@ -3,10 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Rectangle;
 
 public class OgreAnimation {
@@ -14,6 +11,7 @@ public class OgreAnimation {
     private Texture img;
     private Animation<TextureRegion> anim;
     private TextureAtlas atlas; //--//
+    private SpriteBatch batch;
 
     private float time;
     private float heroX;
@@ -22,6 +20,7 @@ public class OgreAnimation {
 
 
     public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
+        batch = new SpriteBatch();
         img = new Texture(name);
         TextureRegion region0 = new TextureRegion(img);
         int xCnt = region0.getRegionWidth() / col;
@@ -61,9 +60,16 @@ public class OgreAnimation {
             }
     }
 
-    public void render(SpriteBatch batch) {
-        batch.draw(getFrame(), heroX, heroY, heroRect.width, heroRect.height);
-    }
+//    public void render() {
+////        batch.draw(getFrame(), heroX, heroY);
+//        Sprite spr = new Sprite(getFrame());
+//        spr.setOriginCenter();
+//        spr.scale(2);
+//        spr.setPosition(heroX,heroY);
+//        this.batch.begin();
+//        spr.draw(batch);
+//        batch.end();
+//    }
 
     public TextureRegion getFrame() {
         return anim.getKeyFrame(time);

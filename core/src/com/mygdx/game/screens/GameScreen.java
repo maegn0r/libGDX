@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -46,7 +47,7 @@ public class GameScreen implements Screen {
         this.contList = new MyContList();
         ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.zoom = 0.67f;
+        camera.zoom = 0.25f;
 
         TiledMap map = new TmxMapLoader().load("map/map1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -82,13 +83,13 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        camera.position.x = body.getPosition().x;
-        camera.position.y = body.getPosition().y;
+        camera.position.x = body.getPosition().x* physX.PPM;
+        camera.position.y = body.getPosition().y* physX.PPM;
         camera.update();
 
         float STEP = 5;
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-80000, 0), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(80000, 0), true);
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) body.applyForceToCenter(new Vector2(-0.70f, 0), true);
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(0.70f, 0), true);
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
             {
                 body.setGravityScale(-15);
@@ -120,11 +121,15 @@ public class GameScreen implements Screen {
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
 
-        batch.begin();
-        batch.setProjectionMatrix(camera.combined);
-        ogreAnimation.setHeroX(body.getPosition().x - ogreAnimation.getHeroRect().width / 2);
-        ogreAnimation.setHeroY(body.getPosition().y - ogreAnimation.getHeroRect().height / 2);
-        ogreAnimation.render(batch);
+        float x = Gdx.graphics.getWidth()/2 - ogreAnimation.getHeroRect().width/2/camera.zoom;
+        float y = Gdx.graphics.getHeight()/2 - ogreAnimation.getHeroRect().height/2/camera.zoom;
+
+        Sprite spr = new Sprite(ogreAnimation.getFrame());
+        spr.setOriginCenter();
+        spr.scale(0.40F);
+        spr.setPosition(x,y);
+        this.batch.begin();
+        spr.draw(batch);
         batch.end();
 
         mapRenderer.render(l1);

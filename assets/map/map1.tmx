@@ -18,7 +18,7 @@
  </tileset>
  <layer id="1" name="Фон" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJzlVMENwjAMdJ4tM9DOAEwASAh2gEn48ukk7AA7MBOpFIvDcZxWSsuDk05Omyh3vlolsuEy+yVx9GInF6/n8nD2QhcXr9nDnFmk4Gg6L6n8LS+Iq/vwRt/E97hGWPn3OCiU+lJPesLnsZB67IGv4vu1fmUesvceY/OXHhzF+Ws54D4il7/lgcCD1qumXwqsL/POVYlc5tr84Rxa85+aCYTMXO6P1bfWqRm0cDfI+vJ+mcUU358hNXP/gCEeuoL+qsA6c64GLgp66LWXnk1Gu4Hagg+uQ/FQ9Feea9Kz554bYKtUDU/l3SvULrAK2hs4s/Xc/Yj7RC//hDdpQWJv
+   eJzllEEOgjAQRadL8AJshDOoJ1ATo3fQk7hlw0m8g97BM1mSmTAO06FAiQt/8tPSRt/vp6EAW25gf44KNOnsYRfXny+VQfKvHnRz/TllSJ1D8mPkIF2W2P6tLFx317mGb/N1mo/pv9VJseRLnszEn8f2L3mUgWLS/2vnlX3UML9/mcFBv3+tB9of27+VAVgG7awx/Kkivux7aLT6D3FCJn7o/mt3wuof8Ddz+NZ8Sv8Pw8SX9112scT7J0nm0Dcght8kzJehc3wO8XPmVcIMLXvtXRr8HPdprFgOGmP1VPgb7y3o75/OXDJXyqjppay9cWzQGbJ3uN6y996HH/kYOMs/6QN4C2M7
   </data>
  </layer>
  <objectgroup id="3" name="объекты">
@@ -103,7 +103,7 @@
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="3"/>
+    <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
   <object id="35" name="Vasya" x="284.667" y="89.6667" width="6.66666" height="7.33333">
@@ -152,12 +152,12 @@
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="3"/>
+    <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="5" name="сеттинг">
-  <object id="27" name="Герой1" x="145.394" y="35.5" width="26.4697" height="39.9545">
+  <object id="27" name="Герой1" x="145.394" y="50.8333" width="17.803" height="24.6212">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="3"/>
