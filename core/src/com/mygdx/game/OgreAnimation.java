@@ -3,21 +3,15 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Rectangle;
 
 public class OgreAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
-    private TextureAtlas atlas; //--//
-
+    private TextureAtlas atlas;
     private float time;
-    private float heroX;
-    private float heroY;
     private Rectangle heroRect;
 
 
@@ -61,10 +55,6 @@ public class OgreAnimation {
             }
     }
 
-    public void render(SpriteBatch batch) {
-        batch.draw(getFrame(), heroX, heroY, heroRect.width, heroRect.height);
-    }
-
     public TextureRegion getFrame() {
         return anim.getKeyFrame(time);
     }
@@ -83,14 +73,6 @@ public class OgreAnimation {
 
     public void setPlayMode(Animation.PlayMode playMode) {
         anim.setPlayMode(playMode);
-    }
-
-    public void setHeroX(float heroX) {
-        this.heroX = heroX;
-    }
-
-    public void setHeroY(float heroY) {
-        this.heroY = heroY;
     }
 
     public Rectangle getHeroRect() {
