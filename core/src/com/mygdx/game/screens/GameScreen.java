@@ -108,7 +108,7 @@ public class GameScreen implements Screen {
 
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
-
+        ogreAnimation.idleOgre();
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             ogreAnimation.update();

@@ -10,6 +10,7 @@ public class OgreAnimation {
 
     private Texture img;
     private Animation<TextureRegion> anim;
+    private Animation<TextureRegion> idleAnim;
     private TextureAtlas atlas;
     private float time;
     private Rectangle heroRect;
@@ -39,8 +40,15 @@ public class OgreAnimation {
         anim.setPlayMode(playMode);
         time += Gdx.graphics.getDeltaTime();
     }
+    public void idleOgre() {
+        idleAnim = new Animation<TextureRegion>(1 / 20f, atlas.findRegion("Walk",1));
+        anim.setPlayMode(Animation.PlayMode.NORMAL);
+
+    }
 
     public void update() {
+        time += Gdx.graphics.getDeltaTime();
+        anim.setPlayMode(Animation.PlayMode.LOOP);
         if (!getFrame().isFlipX()) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
                 for (TextureRegion keyFrame : this.anim.getKeyFrames()) {
