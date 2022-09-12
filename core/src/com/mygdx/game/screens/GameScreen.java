@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -13,11 +14,14 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Main;
+import com.mygdx.game.NewFont;
 import com.mygdx.game.OgreAnimation;
 import com.mygdx.game.PhysX;
 import java.util.ArrayList;
@@ -35,16 +39,22 @@ public class GameScreen implements Screen {
     private final int[] bg;
     private final int[] l1;
     private PhysX physX;
+    private final NewFont font;
     private Body body;
     public static ArrayList<Body> bodies;
+    private int score;
+    private  int maxScore;
 
     public GameScreen(Main game) {
+        font = new NewFont(30);
+        font.setColor(Color.WHITE);
         bodies = new ArrayList<>();
         this.game = game;
         batch = new SpriteBatch();
         ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.35f;
+//        maxScore = physX.getBodys("roll").size;
 
         TiledMap map = new TmxMapLoader().load("map/map1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -88,14 +98,14 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(0.70f, 0), true);
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && physX.getContList().isOnGroung()) {
             {
-                body.setGravityScale(-15);
+                body.setGravityScale(-8);
             }
         } else {
-            body.setGravityScale(3);
+            body.setGravityScale(1);
             body.setFixedRotation(true);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
-        if (physX.getContList().isOnJumper()){body.setGravityScale(-35);};
+        if (physX.getContList().isOnJumper()){body.setGravityScale(-18);};
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) camera.zoom += 0.01f;
@@ -117,16 +127,22 @@ public class GameScreen implements Screen {
 
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
+        Rectangle tmp = ogreAnimation.getRect(camera, ogreAnimation.getFrame());
+        ((PolygonShape)body.getFixtureList().get(0).getShape()).setAsBox(tmp.width/2.2F/physX.PPM*camera.zoom, tmp.height/2.6f/ physX.PPM*camera.zoom,
+                new Vector2(0,-tmp.height/2/physX.PPM*camera.zoom/100), 0);
+        ((PolygonShape)body.getFixtureList().get(1).getShape()).setAsBox(
+                tmp.width/3/physX.PPM*camera.zoom,
+                tmp.height/12/physX.PPM*camera.zoom,
+                new Vector2(0,-tmp.height/2.6F/physX.PPM*camera.zoom),
+                0);
 
-        float x = Gdx.graphics.getWidth()/2 - ogreAnimation.getHeroRect().width/2/camera.zoom;
-        float y = Gdx.graphics.getHeight()/2 - ogreAnimation.getHeroRect().height/2/camera.zoom;
-
-        Sprite spr = new Sprite(ogreAnimation.getFrame());
-        spr.setOriginCenter();
-        spr.scale(0.40F);
-        spr.setPosition(x,y);
+        ogreAnimation.setTime(Gdx.graphics.getDeltaTime());
         batch.begin();
-        spr.draw(batch);
+        batch.draw(ogreAnimation.getFrame(), tmp.x,tmp.y, tmp.width, tmp.height);
+        batch.end();
+
+        batch.begin();
+        font.render(batch, "Звезд собрано: " + String.valueOf(score), 10, Gdx.graphics.getHeight()-10);
         batch.end();
 
         mapRenderer.render(l1);
@@ -135,6 +151,7 @@ public class GameScreen implements Screen {
         physX.debugDraw(camera);
         for (int i = 0; i < bodies.size(); i++) {
             physX.destroyBody(bodies.get(i));
+            score++;
         }
         bodies.clear();
     }

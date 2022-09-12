@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,6 +15,7 @@ public class OgreAnimation {
     private TextureAtlas atlas;
     private float time;
     private Rectangle heroRect;
+    private static float dScale = 2.8f;
 
 
     public OgreAnimation(String name, int col, int row, Animation.PlayMode playMode) {
@@ -40,6 +42,14 @@ public class OgreAnimation {
         anim.setPlayMode(playMode);
         time += Gdx.graphics.getDeltaTime();
     }
+    public Rectangle getRect(OrthographicCamera camera, TextureRegion region) {
+        float cx = Gdx.graphics.getWidth()/2 - region.getRegionWidth()/2 / camera.zoom/ dScale;
+        float cy = Gdx.graphics.getHeight()/2 - region.getRegionHeight()/2 / camera.zoom/ dScale;
+        float cW = region.getRegionWidth() / camera.zoom / dScale;
+        float cH = region.getRegionHeight() / camera.zoom / dScale;
+        return new Rectangle(cx , cy, cW, cH);
+    }
+
     public void idleOgre() {
         idleAnim = new Animation<TextureRegion>(1 / 20f, atlas.findRegion("Walk",1));
         anim.setPlayMode(Animation.PlayMode.NORMAL);
