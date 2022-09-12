@@ -43,7 +43,6 @@ public class OgreAnimation {
     public void idleOgre() {
         idleAnim = new Animation<TextureRegion>(1 / 20f, atlas.findRegion("Walk",1));
         anim.setPlayMode(Animation.PlayMode.NORMAL);
-
     }
 
     public void update() {

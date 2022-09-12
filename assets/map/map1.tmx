@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="43">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="45">
  <tileset firstgid="1" name="monochrome_tilemap_transparent" tilewidth="16" tileheight="16" spacing="1" tilecount="400" columns="20">
   <image source="monochrome_tilemap_transparent.png" width="339" height="339"/>
   <tile id="136">
@@ -106,42 +106,42 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="35" name="Vasya" x="284.667" y="89.6667" width="6.66666" height="7.33333">
+  <object id="35" name="Star" x="284.667" y="89.6667" width="6.66666" height="7.33333">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="37" name="Vasya" x="312.333" y="89" width="6.66666" height="7.33333">
+  <object id="37" name="Star" x="312.333" y="89" width="6.66666" height="7.33333">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="38" name="Vasya" x="311.333" y="26.3333" width="6.66666" height="7.33333">
+  <object id="38" name="Star" x="311.333" y="26.3333" width="6.66666" height="7.33333">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="39" name="Vasya" x="342.333" y="32.6667" width="6.66666" height="7.33333">
+  <object id="39" name="Star" x="342.333" y="32.6667" width="6.66666" height="7.33333">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="40" name="Vasya" x="200" y="225.333" width="6.66666" height="7.33333">
+  <object id="40" name="Star" x="200" y="225.333" width="6.66666" height="7.33333">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="41" name="Vasya" x="360.667" y="65.6667" width="6.66666" height="7.33333">
+  <object id="41" name="Star" x="360.667" y="65.6667" width="6.66666" height="7.33333">
    <properties>
     <property name="BodyType" value="DynamicBody"/>
     <property name="gravityScale" type="float" value="10"/>
@@ -149,6 +149,20 @@
    </properties>
   </object>
   <object id="42" x="504.333" y="2.00017" width="8.66667" height="333.333">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="43" name="Jumper" x="130.364" y="240.727" width="11.6364" height="3.81818">
+   <properties>
+    <property name="BodyType" value="StaticBody"/>
+    <property name="gravityScale" type="float" value="1"/>
+    <property name="restitution" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="44" name="Jumper" x="146.727" y="257.091" width="10.5455" height="2.54545">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>

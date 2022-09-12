@@ -95,6 +95,7 @@ public class GameScreen implements Screen {
             body.setFixedRotation(true);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
+        if (physX.getContList().isOnJumper()){body.setGravityScale(-35);};
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) camera.zoom += 0.01f;
