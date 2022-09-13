@@ -30,7 +30,7 @@ public class GameScreen implements Screen {
     private Star star;
     private OrthographicCamera camera;
     private final Sound startGameSound;
-    private final Sound getStarSound;
+    private final Sound gainStarSound;
     private final Music music;
     private final OrthogonalTiledMapRenderer mapRenderer;
 
@@ -61,8 +61,7 @@ public class GameScreen implements Screen {
         startGameSound = Gdx.audio.newSound(Gdx.files.internal("start_game.mp3"));
         startGameSound.play();
 
-        getStarSound = Gdx.audio.newSound(Gdx.files.internal("star_gain_sound.mp3"));
-
+        gainStarSound = Gdx.audio.newSound(Gdx.files.internal("star_gain_sound.mp3"));
 
         music = Gdx.audio.newMusic(Gdx.files.internal("game_music" + StageCounter.getStageCounter() +".mp3"));
         music.setLooping(true);
@@ -75,7 +74,6 @@ public class GameScreen implements Screen {
         physX = new PhysX();
         RectangleMapObject rectMapObject = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("Герой1");
         body = physX.addObject(rectMapObject);
-
 
         Array<RectangleMapObject> objects = map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);
         for (int i = 0; i < objects.size; i++) {
@@ -165,13 +163,21 @@ public class GameScreen implements Screen {
         for (int i = 0; i < bodies.size(); i++) {
             physX.destroyBody(bodies.get(i));
             score++;
-            getStarSound.play();
+            gainStarSound.play();
         }
         bodies.clear();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            dispose();
+            game.setScreen(new GameOverScreen(game));
+        }
+
         if (score == maxScore){
             dispose();
             StageCounter.upStageCounter();
-            game.setScreen(new MenuScreen(game));
+            if (StageCounter.getStageCounter() < 4){
+            game.setScreen(new MenuScreen(game));}
+            else {game.setScreen(new GameOverScreen(game));};
         }
     }
 
@@ -201,7 +207,7 @@ public class GameScreen implements Screen {
         batch.dispose();
         ogre.dispose();
         star.dispose();
-        getStarSound.dispose();
+        gainStarSound.dispose();
         startGameSound.dispose();
         music.dispose();
         physX.dispose();

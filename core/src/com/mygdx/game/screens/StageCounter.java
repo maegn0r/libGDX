@@ -7,8 +7,11 @@ public class StageCounter {
     public static int getStageCounter() {
         return stageCounter;
     }
-
     public static void upStageCounter() {
         stageCounter++;
     }
+    public static void clearStageCounter() {
+        stageCounter = 1;
+    }
+
 }

@@ -13,7 +13,7 @@ public class NewFont {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Raleway-Black.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = size;
-        parameter.characters = "STARSGETЙЦУКЕНГШЩЗХЪ!ФЫВАПРОЛДЖЭЯЧСМИТЬБЮйцукенгшщзхъфывапролджэячсмитьбю" +
+        parameter.characters = "FSTARScCGETЙЦУКЕНГШЩЗХЪ!ФЫВАПРОЛДЖЭЯЧСМИТЬБЮйцукенгшщзхъфывапролcджэячсмитьбю" +
                 "-+=0123456789.:";
         cyrillicFont = generator.generateFont(parameter);
         generator.dispose();
