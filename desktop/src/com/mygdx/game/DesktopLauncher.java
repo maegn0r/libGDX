@@ -8,7 +8,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("Hello!");
+		config.setTitle("The Ogre Adventure");
 		new Lwjgl3Application(new Main(), config);
 	}
 }

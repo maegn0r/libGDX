@@ -18,18 +18,18 @@
  </tileset>
  <layer id="1" name="Фон" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJzllEEOgjAQRadL8AJshDOoJ1ATo3fQk7hlw0m8g97BM1mSmTAO06FAiQt/8tPSRt/vp6EAW25gf44KNOnsYRfXny+VQfKvHnRz/TllSJ1D8mPkIF2W2P6tLFx317mGb/N1mo/pv9VJseRLnszEn8f2L3mUgWLS/2vnlX3UML9/mcFBv3+tB9of27+VAVgG7awx/Kkivux7aLT6D3FCJn7o/mt3wuof8Ddz+NZ8Sv8Pw8SX9112scT7J0nm0Dcght8kzJehc3wO8XPmVcIMLXvtXRr8HPdprFgOGmP1VPgb7y3o75/OXDJXyqjppay9cWzQGbJ3uN6y996HH/kYOMs/6QN4C2M7
+   eJzVlDEOwjAMRZ2JK2TqXYAF7gAS92DtkjNxBAbO041EcoT15dohLar40ledxPGr2yiRbAVnfYli9ikDzgzZIr5kX3nOi0NDzrdx7PlwtM5/idTP79U4w7+Hj3Es54ue2YOog+vaHm0e+Zq0GpKPXKsW1pnrH3vTekVWMHJa+NiDN9aeNd6xLfZI9v9v5SO71H2xtf5l3q/Of+VrbGmPPxprPXysqfEnfsq7EjWJGPMm4Gv16pzVv7wrLWl52vmreVb/D6Ib1pf5Ay46e7281vNX38Hi92iL+9/jl16TGCdarsQehCt/n33YyMcVevt3vQE/8lHX
   </data>
  </layer>
  <objectgroup id="3" name="объекты">
-  <object id="18" name="поверхность" x="176.5" y="81" width="78.25" height="15.5">
+  <object id="18" name="поверхность" x="143.833" y="112.667" width="16.9167" height="15.5">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="17" x="177.25" y="92.25" width="15" height="18.5">
+  <object id="17" x="82.25" y="112.25" width="15" height="15.5">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
@@ -43,56 +43,28 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="11" name="поверхность" x="431.833" y="225.5" width="46.6667" height="63.4167">
+  <object id="11" name="поверхность" x="434.833" y="273.5" width="46.1667" height="14.9167">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="13" name="поверхность" x="48.5" y="272.5" width="47" height="16.75">
+  <object id="22" name="поверхность" x="223.083" y="80.0833" width="15.25" height="30">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="14" name="поверхность" x="65" y="256.5" width="140.5" height="33">
+  <object id="24" name="поверхность" x="344.25" y="142.75" width="16" height="78.25">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="15" name="поверхность" x="80.5" y="240.25" width="63.25" height="19.375">
-   <properties>
-    <property name="BodyType" value="StaticBody"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="19" x="241.5" y="84.5" width="14" height="27">
-   <properties>
-    <property name="BodyType" value="StaticBody"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="22" name="поверхность" x="257.25" y="96.75" width="13.75" height="30">
-   <properties>
-    <property name="BodyType" value="StaticBody"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="24" name="поверхность" x="273.25" y="112.75" width="13.5" height="78.25">
-   <properties>
-    <property name="BodyType" value="StaticBody"/>
-    <property name="gravityScale" type="float" value="1"/>
-    <property name="restitution" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="25" name="поверхность" x="177.25" y="161" width="108.75" height="31">
+  <object id="25" name="поверхность" x="177.75" y="223.833" width="14.5833" height="31">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
@@ -106,7 +78,7 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="40" name="Star" x="195" y="212" width="15" height="15">
+  <object id="40" name="Star" x="248.333" y="33" width="15" height="15">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="10"/>
@@ -120,14 +92,14 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="43" name="Jumper" x="130.364" y="240.727" width="11.6364" height="3.81818">
+  <object id="43" name="Jumper" x="81.8636" y="288.352" width="11.6364" height="3.81818">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="44" name="Jumper" x="146.727" y="257.091" width="10.5455" height="2.54545">
+  <object id="44" name="Jumper" x="130.477" y="288.466" width="10.5455" height="2.54545">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="1"/>
@@ -148,7 +120,7 @@
     <property name="restitution" type="float" value="0"/>
    </properties>
   </object>
-  <object id="56" name="Star" x="269" y="228.5" width="15" height="15">
+  <object id="56" name="Star" x="273.333" y="53.1667" width="15" height="15">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="10"/>
@@ -162,14 +134,14 @@
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="60" name="Star" x="240.5" y="136" width="15" height="15">
+  <object id="60" name="Star" x="366.833" y="91.3333" width="15" height="15">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="61" name="Star" x="482.5" y="256.5" width="15" height="15">
+  <object id="61" name="Star" x="393.833" y="40.1667" width="15" height="15">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="10"/>
@@ -183,14 +155,14 @@
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="63" name="Star" x="40.5" y="223.5" width="15" height="15">
+  <object id="63" name="Star" x="153.167" y="34.8333" width="15" height="15">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="10"/>
     <property name="restitution" type="float" value="0.5"/>
    </properties>
   </object>
-  <object id="64" name="Star" x="450" y="197.5" width="15" height="15">
+  <object id="64" name="Star" x="342.667" y="240.167" width="15" height="15">
    <properties>
     <property name="BodyType" value="StaticBody"/>
     <property name="gravityScale" type="float" value="10"/>
@@ -216,12 +188,12 @@
  </objectgroup>
  <layer id="2" name="Слой2" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwXAGLUh4KNv/gERMbftHAfUAAJVVDyU=
+   eJxjYBgFo2AUjIJRMApGwXAGLUh4sNlvjoRxAXMsmJC8OR75UTDwAADeVwb3
   </data>
  </layer>
  <layer id="4" name="Слой3" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B40MYIwZoD7ZBRMApGwSggEYDKrlEwCrQH2gGjAAwAQ8UB6g==
+   eJztwTEBAAAAwqD1T20LL6AAAOBnCoAAAQ==
   </data>
  </layer>
 </map>

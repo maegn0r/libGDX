@@ -18,7 +18,7 @@ public class Star {
 
     public Star(String atlasName, Animation.PlayMode playMode) {
         atlas = new TextureAtlas(atlasName);
-        anim = new Animation<TextureRegion>(1 / 10f, atlas.findRegions("star"));
+        anim = new Animation<TextureRegion>(1 / 05f, atlas.findRegions("star"));
         anim.setPlayMode(playMode);
         time += Gdx.graphics.getDeltaTime();
     }

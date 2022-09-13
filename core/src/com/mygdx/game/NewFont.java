@@ -19,7 +19,7 @@ public class NewFont {
         generator.dispose();
     }
 
-    public void render (SpriteBatch batch, String str, int x, int y) {cyrillicFont.draw(batch, str, x, y);}
+    public void render (SpriteBatch batch, String str, float x, float y) {cyrillicFont.draw(batch, str, x, y);}
 
     public int getHeight() {return (int) cyrillicFont.getCapHeight()+1;}
     public void setColor(Color color) {cyrillicFont.setColor(color);}

@@ -26,11 +26,9 @@ import java.util.ArrayList;
 public class GameScreen implements Screen {
     private final Main game;
     private SpriteBatch batch;
-    private int clickCounter;
     private Ogre ogre;
     private Star star;
     private OrthographicCamera camera;
-    private MyAnimation starAnim;
     private final Sound startGameSound;
     private final Music music;
     private final OrthogonalTiledMapRenderer mapRenderer;
@@ -42,9 +40,10 @@ public class GameScreen implements Screen {
     private Body body;
     public static ArrayList<Body> bodies;
     private int score;
-    private  int maxScore;
+    private int maxScore;
 
-    public GameScreen(Main game) {
+
+    public GameScreen(Main game, String mapName) {
         ogre = new Ogre("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         star = new Star("atlas/starAtlas.atlas",Animation.PlayMode.LOOP);
         font = new NewFont(30);
@@ -52,14 +51,10 @@ public class GameScreen implements Screen {
         bodies = new ArrayList<>();
         this.game = game;
         batch = new SpriteBatch();
-  //      myAnimation = new MyAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
-        starAnim = new MyAnimation(Animation.PlayMode.LOOP);
-
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.35f;
-//        maxScore = physX.getBodys("roll").size;
 
-        TiledMap map = new TmxMapLoader().load("map/map1.tmx");
+        TiledMap map = new TmxMapLoader().load(mapName);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         startGameSound = Gdx.audio.newSound(Gdx.files.internal("start_game.mp3"));
@@ -75,7 +70,6 @@ public class GameScreen implements Screen {
 
         physX = new PhysX();
         RectangleMapObject rectMapObject = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("Герой1");
-//        myAnimation.setHeroRect(rectMapObject.getRectangle());
         body = physX.addObject(rectMapObject);
 
 
@@ -131,8 +125,6 @@ public class GameScreen implements Screen {
             ogre.update();
             ogre.setTime(Gdx.graphics.getDeltaTime());}
 
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
-        Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
         Rectangle tmp = ogre.getRect(camera, ogre.getFrame());
         ((PolygonShape)body.getFixtureList().get(0).getShape()).setAsBox(tmp.width/2.2F/physX.PPM*camera.zoom, tmp.height/2.6f/ physX.PPM*camera.zoom,
                 new Vector2(0,-tmp.height/2/physX.PPM*camera.zoom/100), 0);
@@ -147,7 +139,6 @@ public class GameScreen implements Screen {
         batch.draw(ogre.getFrame(), tmp.x,tmp.y, tmp.width, tmp.height);
         batch.end();
 
-//        TextureRegion imgT = starAnim.getFrame();
         batch.begin();
         Array<Body> ab = physX.getBodys("Star");
         for (Body b: ab) {
@@ -172,6 +163,11 @@ public class GameScreen implements Screen {
             score++;
         }
         bodies.clear();
+        if (score == maxScore){
+            dispose();
+            StageCounter.upStageCounter();
+            game.setScreen(new MenuScreen(game));
+        }
     }
 
     @Override
@@ -202,6 +198,8 @@ public class GameScreen implements Screen {
         star.dispose();
         startGameSound.dispose();
         music.dispose();
+        physX.dispose();
+        mapRenderer.dispose();
+        font.dispose();;
     }
-
 }
