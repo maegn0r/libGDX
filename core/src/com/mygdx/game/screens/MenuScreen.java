@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Main;
+import com.mygdx.game.NewFont;
 
 public class MenuScreen implements Screen {
     private final Main game;
@@ -24,8 +25,10 @@ public class MenuScreen implements Screen {
     private final Sound missClickOnMenuScreenSound;
     private final float BUTTON_WIDTH = 250;
     private final float BUTTON_HEIGHT = 100;
-
+    private final NewFont font;
     public MenuScreen(Main game) {
+        font = new NewFont(30);
+        font.setColor(Color.FIREBRICK);
         this.game = game;
         img = new Texture("main_screen.png");
         Gdx.graphics.setWindowedMode(img.getWidth(), img.getHeight());
@@ -46,6 +49,7 @@ public class MenuScreen implements Screen {
     public void show() {
     }
 
+
     @Override
     public void render(float delta) {
 
@@ -60,13 +64,16 @@ public class MenuScreen implements Screen {
         shapeRenderer.rect(startRect.x, startRect.y, startRect.width, startRect.height);
         shapeRenderer.end();
 
+        batch.begin();
+        font.render(batch, "Уровень: " + StageCounter.getStageCounter(), this.startRect.width*1.25F, this.startRect.y*1.25F);
+        batch.end();
+
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             int x = Gdx.input.getX();
             int y = Gdx.graphics.getHeight() - Gdx.input.getY();
             Vector2 vect = new Vector2(x, y);
             if (startRect.contains(vect)) {
-//                startGameSound.play();
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, "map/map" + StageCounter.getStageCounter() + ".tmx"));
                 dispose();
             }
             else {
@@ -94,6 +101,7 @@ public class MenuScreen implements Screen {
     public void hide() {
 
     }
+
 
     @Override
     public void dispose() {

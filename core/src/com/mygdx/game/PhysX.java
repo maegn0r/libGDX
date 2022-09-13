@@ -5,6 +5,10 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.screens.PhysBody;
+
+import java.util.Iterator;
 
 public class PhysX {
     private final World world;
@@ -41,10 +45,13 @@ public class PhysX {
         fdef.density = 1;
         fdef.restitution = (float) object.getProperties().get("restitution");
 
+        String name = "";
+        if (object.getName() != null) name = object.getName();
         Body body;
         body = world.createBody(def);
-        String name = object.getName();
+        body.setUserData(new PhysBody(name, new Vector2(rect.x, rect.y), new Vector2(rect.width, rect.height)));
         body.createFixture(fdef).setUserData(name);
+
         if (name != null && name.equals("Герой1")){
             polygonShape.setAsBox(rect.width/2.4f/PPM , rect.height/8/PPM,new Vector2(0, -rect.width/1.3f/PPM),0);
             body.createFixture(fdef).setUserData("ноги");
@@ -67,17 +74,27 @@ public class PhysX {
         debugRenderer.render(world, camera.combined);
     }
 
-    public void dispose() {
-        world.dispose();
-        debugRenderer.dispose();
-    }
-
     public void destroyBody(Body body) {
         world.destroyBody(body);
+    }
+    public Array<Body> getBodys(String name){
+        Array<Body> ab = new Array<>();
+        world.getBodies(ab);
+        Iterator<Body> it = ab.iterator();
+        while (it.hasNext()){
+            String text = ((PhysBody)it.next().getUserData()).name;
+            if (!text.equals(name)) it.remove();
+        }
+        return ab;
     }
 
     public MyContList getContList() {
         return contList;
+    }
+
+    public void dispose() {
+        world.dispose();
+        debugRenderer.dispose();
     }
 
 }

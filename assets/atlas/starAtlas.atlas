@@ -1,0 +1,76 @@
+
+starAtlas.png
+size: 2048, 256
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+star
+  rotate: false
+  xy: 2, 2
+  size: 199, 202
+  orig: 199, 202
+  offset: 0, 0
+  index: 9
+star
+  rotate: false
+  xy: 203, 13
+  size: 172, 191
+  orig: 172, 191
+  offset: 0, 0
+  index: 10
+star
+  rotate: false
+  xy: 377, 28
+  size: 178, 176
+  orig: 178, 176
+  offset: 0, 0
+  index: 2
+star
+  rotate: false
+  xy: 557, 9
+  size: 160, 195
+  orig: 160, 195
+  offset: 0, 0
+  index: 8
+star
+  rotate: false
+  xy: 719, 2
+  size: 143, 202
+  orig: 143, 202
+  offset: 0, 0
+  index: 7
+star
+  rotate: false
+  xy: 864, 40
+  size: 165, 164
+  orig: 165, 164
+  offset: 0, 0
+  index: 1
+star
+  rotate: false
+  xy: 1031, 26
+  size: 151, 178
+  orig: 151, 178
+  offset: 0, 0
+  index: 3
+star
+  rotate: false
+  xy: 1184, 14
+  size: 122, 190
+  orig: 122, 190
+  offset: 0, 0
+  index: 4
+star
+  rotate: false
+  xy: 1308, 22
+  size: 76, 182
+  orig: 76, 182
+  offset: 0, 0
+  index: 5
+star
+  rotate: false
+  xy: 1386, 43
+  size: 70, 161
+  orig: 70, 161
+  offset: 0, 0
+  index: 6

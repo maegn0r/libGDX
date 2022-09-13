@@ -5,54 +5,65 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Main;
-import com.mygdx.game.OgreAnimation;
-import com.mygdx.game.PhysX;
+import com.mygdx.game.*;
+
 import java.util.ArrayList;
 
 public class GameScreen implements Screen {
     private final Main game;
     private SpriteBatch batch;
-    private int clickCounter;
-    private OgreAnimation ogreAnimation;
+    private Ogre ogre;
+    private Star star;
     private OrthographicCamera camera;
     private final Sound startGameSound;
+    private final Sound gainStarSound;
     private final Music music;
     private final OrthogonalTiledMapRenderer mapRenderer;
 
     private final int[] bg;
     private final int[] l1;
     private PhysX physX;
+    private final NewFont font;
     private Body body;
     public static ArrayList<Body> bodies;
+    private int score;
+    private int maxScore;
 
-    public GameScreen(Main game) {
+
+    public GameScreen(Main game, String mapName) {
+        ogre = new Ogre("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
+        star = new Star("atlas/starAtlas.atlas",Animation.PlayMode.LOOP);
+        font = new NewFont(30);
+        font.setColor(Color.RED);
         bodies = new ArrayList<>();
         this.game = game;
         batch = new SpriteBatch();
-        ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.35f;
 
-        TiledMap map = new TmxMapLoader().load("map/map1.tmx");
+        TiledMap map = new TmxMapLoader().load(mapName);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         startGameSound = Gdx.audio.newSound(Gdx.files.internal("start_game.mp3"));
         startGameSound.play();
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("game_music.mp3"));
+        gainStarSound = Gdx.audio.newSound(Gdx.files.internal("star_gain_sound.mp3"));
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("game_music" + StageCounter.getStageCounter() +".mp3"));
         music.setLooping(true);
         music.setVolume(0.03f);
         music.play();
@@ -62,14 +73,14 @@ public class GameScreen implements Screen {
 
         physX = new PhysX();
         RectangleMapObject rectMapObject = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("Герой1");
-        ogreAnimation.setHeroRect(rectMapObject.getRectangle());
         body = physX.addObject(rectMapObject);
-
 
         Array<RectangleMapObject> objects = map.getLayers().get("объекты").getObjects().getByType(RectangleMapObject.class);
         for (int i = 0; i < objects.size; i++) {
             physX.addObject(objects.get(i));
         }
+
+        maxScore = physX.getBodys("Star").size;
     }
 
     @Override
@@ -88,13 +99,14 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) body.applyForceToCenter(new Vector2(0.70f, 0), true);
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && physX.getContList().isOnGroung()) {
             {
-                body.setGravityScale(-15);
+                body.setGravityScale(-8);
             }
         } else {
-            body.setGravityScale(3);
+            body.setGravityScale(1);
             body.setFixedRotation(true);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
+        if (physX.getContList().isOnJumper()){body.setGravityScale(-18);}
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) camera.zoom += 0.01f;
@@ -108,24 +120,40 @@ public class GameScreen implements Screen {
 
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
-
+        ogre.idleOgre();
+        star.setTime(Gdx.graphics.getDeltaTime());
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            ogreAnimation.update();
-            ogreAnimation.setTime(Gdx.graphics.getDeltaTime());}
+            ogre.update();
+            ogre.setTime(Gdx.graphics.getDeltaTime());}
 
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
-        Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
+        Rectangle tmp = ogre.getRect(camera, ogre.getFrame());
+        ((PolygonShape)body.getFixtureList().get(0).getShape()).setAsBox(tmp.width/2.2F/physX.PPM*camera.zoom, tmp.height/2.6f/ physX.PPM*camera.zoom,
+                new Vector2(0,-tmp.height/2/physX.PPM*camera.zoom/100), 0);
+        ((PolygonShape)body.getFixtureList().get(1).getShape()).setAsBox(
+                tmp.width/3/physX.PPM*camera.zoom,
+                tmp.height/12/physX.PPM*camera.zoom,
+                new Vector2(0,-tmp.height/2.6F/physX.PPM*camera.zoom),
+                0);
 
-        float x = Gdx.graphics.getWidth()/2 - ogreAnimation.getHeroRect().width/2/camera.zoom;
-        float y = Gdx.graphics.getHeight()/2 - ogreAnimation.getHeroRect().height/2/camera.zoom;
-
-        Sprite spr = new Sprite(ogreAnimation.getFrame());
-        spr.setOriginCenter();
-        spr.scale(0.40F);
-        spr.setPosition(x,y);
+        ogre.setTime(Gdx.graphics.getDeltaTime());
         batch.begin();
-        spr.draw(batch);
+        batch.draw(ogre.getFrame(), tmp.x,tmp.y, tmp.width, tmp.height);
+        batch.end();
+
+        batch.begin();
+        Array<Body> ab = physX.getBodys("Star");
+        for (Body b: ab) {
+            float x = Gdx.graphics.getWidth()/2 + (b.getPosition().x * physX.PPM - ((PhysBody) b.getUserData()).size.x/2 - camera.position.x) / camera.zoom;
+            float y = Gdx.graphics.getHeight()/2 + (b.getPosition().y * physX.PPM - ((PhysBody) b.getUserData()).size.y/2 - camera.position.y) / camera.zoom;
+            batch.draw(star.getFrame(), x, y,
+                    ((PhysBody) b.getUserData()).size.x / camera.zoom,
+                    ((PhysBody) b.getUserData()).size.y / camera.zoom);
+        }
+        batch.end();
+
+        batch.begin();
+        font.render(batch, "Звезд собрано: " + String.valueOf(score), 10, Gdx.graphics.getHeight()-10);
         batch.end();
 
         mapRenderer.render(l1);
@@ -134,8 +162,23 @@ public class GameScreen implements Screen {
         physX.debugDraw(camera);
         for (int i = 0; i < bodies.size(); i++) {
             physX.destroyBody(bodies.get(i));
+            score++;
+            gainStarSound.play();
         }
         bodies.clear();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            dispose();
+            game.setScreen(new GameOverScreen(game));
+        }
+
+        if (score == maxScore){
+            dispose();
+            StageCounter.upStageCounter();
+            if (StageCounter.getStageCounter() < 4){
+            game.setScreen(new MenuScreen(game));}
+            else {game.setScreen(new GameOverScreen(game));};
+        }
     }
 
     @Override
@@ -162,9 +205,13 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        ogreAnimation.dispose();
+        ogre.dispose();
+        star.dispose();
+        gainStarSound.dispose();
         startGameSound.dispose();
         music.dispose();
+        physX.dispose();
+        mapRenderer.dispose();
+        font.dispose();
     }
-
 }
