@@ -8,7 +8,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -20,18 +19,18 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Main;
-import com.mygdx.game.NewFont;
-import com.mygdx.game.OgreAnimation;
-import com.mygdx.game.PhysX;
+import com.mygdx.game.*;
+
 import java.util.ArrayList;
 
 public class GameScreen implements Screen {
     private final Main game;
     private SpriteBatch batch;
     private int clickCounter;
-    private OgreAnimation ogreAnimation;
+    private Ogre ogre;
+    private Star star;
     private OrthographicCamera camera;
+    private MyAnimation starAnim;
     private final Sound startGameSound;
     private final Music music;
     private final OrthogonalTiledMapRenderer mapRenderer;
@@ -46,12 +45,16 @@ public class GameScreen implements Screen {
     private  int maxScore;
 
     public GameScreen(Main game) {
+        ogre = new Ogre("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
+        star = new Star("atlas/starAtlas.atlas",Animation.PlayMode.LOOP);
         font = new NewFont(30);
         font.setColor(Color.WHITE);
         bodies = new ArrayList<>();
         this.game = game;
         batch = new SpriteBatch();
-        ogreAnimation = new OgreAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
+  //      myAnimation = new MyAnimation("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
+        starAnim = new MyAnimation(Animation.PlayMode.LOOP);
+
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.35f;
 //        maxScore = physX.getBodys("roll").size;
@@ -72,7 +75,7 @@ public class GameScreen implements Screen {
 
         physX = new PhysX();
         RectangleMapObject rectMapObject = (RectangleMapObject) map.getLayers().get("сеттинг").getObjects().get("Герой1");
-        ogreAnimation.setHeroRect(rectMapObject.getRectangle());
+//        myAnimation.setHeroRect(rectMapObject.getRectangle());
         body = physX.addObject(rectMapObject);
 
 
@@ -80,6 +83,8 @@ public class GameScreen implements Screen {
         for (int i = 0; i < objects.size; i++) {
             physX.addObject(objects.get(i));
         }
+
+        maxScore = physX.getBodys("Star").size;
     }
 
     @Override
@@ -119,15 +124,16 @@ public class GameScreen implements Screen {
 
         mapRenderer.setView(camera);
         mapRenderer.render(bg);
-        ogreAnimation.idleOgre();
+        ogre.idleOgre();
+        star.setTime(Gdx.graphics.getDeltaTime());
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            ogreAnimation.update();
-            ogreAnimation.setTime(Gdx.graphics.getDeltaTime());}
+            ogre.update();
+            ogre.setTime(Gdx.graphics.getDeltaTime());}
 
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) clickCounter++;
         Gdx.graphics.setTitle("Было сделано " + clickCounter + " левых кликов мышкой");
-        Rectangle tmp = ogreAnimation.getRect(camera, ogreAnimation.getFrame());
+        Rectangle tmp = ogre.getRect(camera, ogre.getFrame());
         ((PolygonShape)body.getFixtureList().get(0).getShape()).setAsBox(tmp.width/2.2F/physX.PPM*camera.zoom, tmp.height/2.6f/ physX.PPM*camera.zoom,
                 new Vector2(0,-tmp.height/2/physX.PPM*camera.zoom/100), 0);
         ((PolygonShape)body.getFixtureList().get(1).getShape()).setAsBox(
@@ -136,9 +142,21 @@ public class GameScreen implements Screen {
                 new Vector2(0,-tmp.height/2.6F/physX.PPM*camera.zoom),
                 0);
 
-        ogreAnimation.setTime(Gdx.graphics.getDeltaTime());
+        ogre.setTime(Gdx.graphics.getDeltaTime());
         batch.begin();
-        batch.draw(ogreAnimation.getFrame(), tmp.x,tmp.y, tmp.width, tmp.height);
+        batch.draw(ogre.getFrame(), tmp.x,tmp.y, tmp.width, tmp.height);
+        batch.end();
+
+//        TextureRegion imgT = starAnim.getFrame();
+        batch.begin();
+        Array<Body> ab = physX.getBodys("Star");
+        for (Body b: ab) {
+            float x = Gdx.graphics.getWidth()/2 + (b.getPosition().x * physX.PPM - ((PhysBody) b.getUserData()).size.x/2 - camera.position.x) / camera.zoom;
+            float y = Gdx.graphics.getHeight()/2 + (b.getPosition().y * physX.PPM - ((PhysBody) b.getUserData()).size.y/2 - camera.position.y) / camera.zoom;
+            batch.draw(star.getFrame(), x, y,
+                    ((PhysBody) b.getUserData()).size.x / camera.zoom,
+                    ((PhysBody) b.getUserData()).size.y / camera.zoom);
+        }
         batch.end();
 
         batch.begin();
@@ -180,7 +198,8 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         batch.dispose();
-        ogreAnimation.dispose();
+        ogre.dispose();
+        star.dispose();
         startGameSound.dispose();
         music.dispose();
     }
