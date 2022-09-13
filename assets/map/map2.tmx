@@ -18,7 +18,7 @@
  </tileset>
  <layer id="1" name="Фон" width="32" height="21">
   <data encoding="base64" compression="zlib">
-   eJzVlDEOwjAMRZ2JK2TqXYAF7gAS92DtkjNxBAbO041EcoT15dohLar40ledxPGr2yiRbAVnfYli9ikDzgzZIr5kX3nOi0NDzrdx7PlwtM5/idTP79U4w7+Hj3Es54ue2YOog+vaHm0e+Zq0GpKPXKsW1pnrH3vTekVWMHJa+NiDN9aeNd6xLfZI9v9v5SO71H2xtf5l3q/Of+VrbGmPPxprPXysqfEnfsq7EjWJGPMm4Gv16pzVv7wrLWl52vmreVb/D6Ib1pf5Ay46e7281vNX38Hi92iL+9/jl16TGCdarsQehCt/n33YyMcVevt3vQE/8lHX
+   eJzVlEEOwiAQRWHlFbriLupG76CJ93DLhjN5BBeepztLMhMnP9OBQrXxJz8MMMzrpITB2fKF/R4N5DNBTv63MfOvtHbxduwrcpbEzG/RGv+lh9+qOMO/+49xLteznpODqIP72hltHfmatBqSj1yrFtaZ6x9703pFljdyavjYQ2mujRzvyBY7Ovv/1/KRneu+yFr/Mu9b95/5Glu6xI/GXgsfa2r8kUb5VqJGEWPeCHytHq9Z/cu30pKWp90/zrP6fzh3w/oyP+Bm4Wwpr/b+8TdY/BZt8f6X+LnXJObJ9SuRgzDz95MPG/m4Qm//rjdzD1Dp
   </data>
  </layer>
  <objectgroup id="3" name="объекты">

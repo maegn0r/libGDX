@@ -30,6 +30,7 @@ public class GameScreen implements Screen {
     private Star star;
     private OrthographicCamera camera;
     private final Sound startGameSound;
+    private final Sound getStarSound;
     private final Music music;
     private final OrthogonalTiledMapRenderer mapRenderer;
 
@@ -47,7 +48,7 @@ public class GameScreen implements Screen {
         ogre = new Ogre("atlas/ogrepack.atlas", Animation.PlayMode.LOOP);
         star = new Star("atlas/starAtlas.atlas",Animation.PlayMode.LOOP);
         font = new NewFont(30);
-        font.setColor(Color.WHITE);
+        font.setColor(Color.RED);
         bodies = new ArrayList<>();
         this.game = game;
         batch = new SpriteBatch();
@@ -60,7 +61,10 @@ public class GameScreen implements Screen {
         startGameSound = Gdx.audio.newSound(Gdx.files.internal("start_game.mp3"));
         startGameSound.play();
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("game_music.mp3"));
+        getStarSound = Gdx.audio.newSound(Gdx.files.internal("star_gain_sound.mp3"));
+
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("game_music" + StageCounter.getStageCounter() +".mp3"));
         music.setLooping(true);
         music.setVolume(0.03f);
         music.play();
@@ -104,7 +108,7 @@ public class GameScreen implements Screen {
             body.setFixedRotation(true);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y -= STEP;
-        if (physX.getContList().isOnJumper()){body.setGravityScale(-18);};
+        if (physX.getContList().isOnJumper()){body.setGravityScale(-18);}
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) camera.zoom += 0.01f;
@@ -161,6 +165,7 @@ public class GameScreen implements Screen {
         for (int i = 0; i < bodies.size(); i++) {
             physX.destroyBody(bodies.get(i));
             score++;
+            getStarSound.play();
         }
         bodies.clear();
         if (score == maxScore){
@@ -196,10 +201,11 @@ public class GameScreen implements Screen {
         batch.dispose();
         ogre.dispose();
         star.dispose();
+        getStarSound.dispose();
         startGameSound.dispose();
         music.dispose();
         physX.dispose();
         mapRenderer.dispose();
-        font.dispose();;
+        font.dispose();
     }
 }

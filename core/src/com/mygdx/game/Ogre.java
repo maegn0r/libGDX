@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,12 +10,10 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Ogre {
 
-    private Texture img;
     private Animation<TextureRegion> anim;
     private Animation<TextureRegion> idleAnim;
     private TextureAtlas atlas;
     private float time;
-    private Rectangle heroRect;
     private static float dScale = 2.8f;
 
     public Ogre(String atlasName, Animation.PlayMode playMode) {

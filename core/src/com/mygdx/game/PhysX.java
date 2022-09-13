@@ -52,10 +52,6 @@ public class PhysX {
         body.setUserData(new PhysBody(name, new Vector2(rect.x, rect.y), new Vector2(rect.width, rect.height)));
         body.createFixture(fdef).setUserData(name);
 
-//        Body body;
-//        body = world.createBody(def);
-//        String name = object.getName();
-//        body.createFixture(fdef).setUserData(name);
         if (name != null && name.equals("Герой1")){
             polygonShape.setAsBox(rect.width/2.4f/PPM , rect.height/8/PPM,new Vector2(0, -rect.width/1.3f/PPM),0);
             body.createFixture(fdef).setUserData("ноги");
